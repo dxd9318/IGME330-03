@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Day 1 Demo</title>
+        <script>
+        "use strict";
+            /*function doStuff(){
+                console.log("doStuff");
+                if(true){
+                    var a = 10; // function-scoped variable (ie. visible thru out entire function)
+                    let b  = 20; // block-scoped
+                    d = 100;    // declared as global w/o strict mode -- BAD, can and will lead to accidents
+                }
+                console.log(a);
+                console.log(b);
+                console.log(d);
+                // const c = 3.1415;   //constant
+                // c = 3.1;    // without declaring strict mode, this will actually work
+            }
+            doStuff();*/
+
+            function init(){
+                document.querySelector("p").style.backgroundColor = "yellow";
+                document.querySelector("p").style.color = "red";
+
+                let button = document.querySelector("#button1");
+                button.onclick = function clickButton(){
+                    // we've now given this function a name // this -was- an anonymous function
+                    //console.log("clicked");
+                    let firstName = document.querySelector("#firstName").value;
+                    let lastName = document.querySelector("#lastName").value;
+
+                   displayGreeting(firstName, lastName);
+                }
+                //window.removeEventListener("load", init);   // we can clean up after ourselves this way. Yay, resource management!
+            }   // end init
+
+            window.onload = init; // old, event-handler way of doing this
+            //window.addEventListener("load", init);  // newer, event-listener way of doing this
+            
+            function displayGreeting(first, last){
+                if(!first) first = "Jane";
+                if(!last) last = "Doe";
+                // let p = document.querySelector("p");
+                // p.innerHTML = "Hello, " + first;
+                // The following line is the same as the above 2 lines
+                document.querySelector("p").innerHTML = "Hello, " + first + " " + last;
+            }
+
+            /*
+            NOTES:
+            // View Source: What the server sent over before JS did anything with it.
+            // Inspect: Live view of the DOM.
+            */
+        </script>
+        <style>
+            * {
+                font-size: 100%;
+            }
+            button {
+                height: 50px;
+                width: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="button1">Click Me!</button>
+        <input id="firstName" placeholder="Enter first Name"><!--HTML will know to close this tag automatically-->
+        <input id="lastName" placeholder="Enter last Name">
+        <p>???</p>
+    </body>
+</html>
