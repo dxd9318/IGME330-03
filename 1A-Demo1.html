@@ -36,7 +36,7 @@
                 //window.removeEventListener("load", init);   // we can clean up after ourselves this way. Yay, resource management!
             }   // end init
 
-            window.onload = init; // old, event-handler way of doing this
+            window.onload = init; // old, event-handler way of doing this                       // event handler/listeners expect a reference to a function, not a function call. we leave off the parentheses here or else: the function will be called immediately AND the listener will be fed null because it's not being given a reference.
             //window.addEventListener("load", init);  // newer, event-listener way of doing this
             
             function displayGreeting(first, last){
