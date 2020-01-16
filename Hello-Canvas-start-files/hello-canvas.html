@@ -96,6 +96,20 @@
 
 			*/
 
+
+			// 2 more drawing state variables
+			ctx.strokeStyle = "green";
+			ctx.lineWidth = 7;
+			// start defining a path - in this case just a line
+			ctx.beginPath();
+			// move a "pen" to 0, 100
+			ctx.moveTo(0, 100);
+			// draw to 640, 100
+			ctx.lineTo(640, 100);
+			// close the path
+			ctx.closePath();
+			// stroke the path so we can see it
+			ctx.stroke();
 		}
 	</script>
 </head>
