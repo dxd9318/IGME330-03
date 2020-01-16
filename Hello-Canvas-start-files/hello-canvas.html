@@ -43,15 +43,26 @@
 			// F - change the current fill color
 			ctx.fillStyle = '#fff3af';
 
+			// set shadow properties
+			ctx.shadowColor = "red";
+			ctx.shadowOffsetX = 0;
+			ctx.shadowOffsetY = 0;
+			ctx.shadowBlur = 30;
+
+			// horizontal alignment
+			ctx.textAlign = "center";
+			// vertical alignment
+			ctx.textBaseline = "middle";
+
 			// G - draw and fill text using current fill color
-			ctx.fillText('Diana Diaz', 50, 240);
+			ctx.fillText('Diana Diaz', 320, 240);	// position modded to account for alignment properties above
 
 
 			// I'm using the following palette I found online: https://colorhunt.co/palette/165754
 			// IGM text
 			ctx.font = 'bold 40pt Arial';
 			ctx.fillStyle = '#c3f584';
-			ctx.fillText('IGM', 50, 320);
+			ctx.fillText('IGM', 320, 320);	// position modded to account for alignment properties above
 
 			// Rectangles
 			ctx.fillStyle = '#f65c78';
