@@ -21,11 +21,11 @@
             doStuff();*/
 
             function init(){
-                document.querySelector("p").style.backgroundColor = "yellow";
-                document.querySelector("p").style.color = "red";
+                //document.querySelector("p").style.backgroundColor = "yellow";
+                //document.querySelector("p").style.color = "red";
 
-                let button = document.querySelector("#button1");
-                button.onclick = function clickButton(){
+                // ANONYMOUS FUNCTION
+                document.querySelector("#button1").onclick = function(){    //could still name the function to find this function in stack trace when debugging
                     // we've now given this function a name // this -was- an anonymous function
                     //console.log("clicked");
                     let firstName = document.querySelector("#firstName").value;
@@ -40,12 +40,15 @@
             //window.addEventListener("load", init);  // newer, event-listener way of doing this
             
             function displayGreeting(first, last){
-                if(!first) first = "Jane";
-                if(!last) last = "Doe";
+                if(first.trim().length == 0) first = "Jane";    // added trimming functionality
+                if(last.trim().length == 0) last = "Doe";
                 // let p = document.querySelector("p");
                 // p.innerHTML = "Hello, " + first;
                 // The following line is the same as the above 2 lines
-                document.querySelector("p").innerHTML = "Hello, " + first + " " + last;
+                //document.querySelector("p").innerHTML = "Hello, " + first + " " + last;
+                
+                // Using template strings
+                document.querySelector("p").innerHTML = `Hello, ${first} ${last}`;
             }
 
             /*
