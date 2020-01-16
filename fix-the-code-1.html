@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Fix The Code - #1</title>
+	<style>
+		*{font-size:1.3em;}
+	</style>
+	<script>
+	"use strict";
+
+	// ERROR 1 - Do not use a function call operator here!! We should be passing in a reference, instead this results in passing in null.
+	//window.onload = init();	
+	window.onload = init;	
+
+	function init(){
+		// ERROR 2 - Trying to reference an element by id without using #
+		//let button = document.querySelector("myButton");
+		let button = document.querySelector("#myButton");
+		
+		// ERROR 5 - Same as error 4 below, .onclick is the property we want (case sensitive).
+		//button.onClick = showRandomNumber;
+		button.onclick = showRandomNumber;
+	}
+
+	function showRandomNumber(){
+		console.log("showRandomNumber was referenced and entered.");
+
+		// ERROR 3 - Same issue as error 2 above.
+		//let paragraph = document.querySelector("myOutput");
+		let paragraph = document.querySelector("#myOutput");
+		
+		// ERROR 4 - The property we want is .innerHTML - this is case sensitive!
+		//paragraph.innerHtml = "Your random number is: " + Math.random();
+		paragraph.innerHTML = "Your random number is: " + Math.random();
+		
+	}
+
+	</script>
+</head>
+<body>
+<button id="myButton">Click Me to see a random number between 0 and 1!</button>
+<p id="myOutput">???</p>
+<p>But first you'll have to fix the errors! There are at least 4 mistakes in this code - can you find and fix them all - without modifying the HTML?</p>
+
+</body>
+</html>
