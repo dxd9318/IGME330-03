@@ -7,6 +7,17 @@
 	canvas{
 		border:1px solid gray;
 	}
+	#fontLoader{
+		height: 0;
+		width: 0;
+		overflow: hidden;
+	}
+	#indie{
+		font-family: 'Indie Flower', cursive;
+	}
+	#lobster{
+		font-family: 'Lobster', cursive;
+	}
 	</style>
   <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
@@ -61,7 +72,7 @@
 
 			// I'm using the following palette I found online: https://colorhunt.co/palette/165754
 			// IGM text
-			ctx.font = 'bold 40pt Arial';
+			ctx.font = 'bold 40pt Lobster';
 			ctx.fillStyle = '#c3f584';
 			ctx.fillText('IGM', 320, 320);	// position modded to account for alignment properties above
 
@@ -119,5 +130,9 @@
 		Get a real browser!
 		<!-- The user will only see the above text if their browser is older and doesn't support <canvas> -->
 	</canvas>
+	<div id="fontLoader">
+		<p id="indie">Indie Font</p>
+		<p id="lobster">Lobster Font</p>
+	</div>
 </body>
 </html>
