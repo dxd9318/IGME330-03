@@ -16,6 +16,7 @@
 		
 		// #1 call the `init` function after the pages loads
 		window.onload = init;
+        let ctx;    //script-scoped for access by other functions within this scope
 	
 		function init(){
 			console.log("page loaded!");
@@ -25,7 +26,10 @@
 			let canvas = document.querySelector('canvas');
 			
 			// B - the `ctx` variable points at a "2D drawing context"
-			let ctx = canvas.getContext('2d');
+			ctx = canvas.getContext('2d');
+
+            cls(ctx);
+
 			
 			// C - all fill operations are now in red
 			ctx.fillStyle = 'red'; 
@@ -63,9 +67,79 @@
             ctx.lineTo(640, 480);
             ctx.closePath();
             ctx.stroke();
-
-            // CONTINUE AT HOME WITH VIDEO 3
+            
+            cls(ctx);
+            update();
 		}
+
+        function update(){
+            requestAnimationFrame(update);
+            drawRandomRect(ctx);
+            drawRandomCircle(ctx);
+            drawRandomLine(ctx);
+        }
+
+        function drawRandomRect(ctx){
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.rect(getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 90), getRandomInt(10, 90));
+            ctx.closePath();
+            ctx.lineWidth = getRandomInt(2,5);
+            ctx.fillStyle = getRandomColor();
+            ctx.strokeStyle = getRandomColor();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function drawRandomCircle(ctx){
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.arc(getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(70, 300), 0, Math.PI*2, false);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.globalAlpha = 0.2;
+            ctx.fill();
+            
+            ctx.restore();
+        }
+
+        function drawRandomLine(ctx){
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.moveTo(getRandomInt(0, 640), getRandomInt(0, 480));
+            ctx.lineTo(getRandomInt(0, 640), getRandomInt(0, 480));
+            ctx.closePath();
+            ctx.strokeStyle = getRandomColor();
+            ctx.stroke();
+            
+            ctx.restore();
+        }
+
+        // clear screen
+        function cls(ctx){
+            setTimeout(function(){cls(ctx);}, getRandomInt(5000, 10000));  //will occur once every 5 seconds
+            ctx.clearRect(0,0, 640, 480);
+        }
+
+        // handy helper functions!
+        function getRandomColor(){
+            // function getByte(){
+            //     return 55 + Math.round(Math.random() * 200);
+            // }
+            const getByte = _ => 55 + Math.round(Math.random() * 200); // ES6 VERSIONS
+            
+            //return "rgba(" + getByte() + "," + getByte() + "," + getByte() + ",.8)";
+            return `rgba(${getByte()}, ${getByte()}, ${getByte()}, .8)`; // ES6 VERSIONS
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
 	</script>
 </head>
 <body>
