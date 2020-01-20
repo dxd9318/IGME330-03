@@ -21,7 +21,6 @@
 	</style>
   <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Seymour+One&display=swap" rel="stylesheet"> <!-- I dont understand how to get multi-word named fonts working in canvas-->
 	<script>
 		// #0 - In this course we will always use ECMAScript 5's "strict" mode
 		// See what 'use strict' does here:
@@ -34,8 +33,10 @@
 	
 		function init(){
 			// #2 Now that the page has loaded, start drawing!
+			// I'm using the following color palette I found online: https://colorhunt.co/palette/165754
 			console.log('init called');
 			
+			// PART I
 			// A - canvas variable points at <canvas> tag
 			var canvas = document.querySelector('canvas');
 			
@@ -48,80 +49,160 @@
 			// D - fill a rectangle with the current fill color
 			ctx.fillRect(0, 0, 640, 480);
 			
+
+			// PART II
 			// E - set the current font
 			ctx.font = 'bold 60pt Lobster';
 			
 			// F - change the current fill color
 			ctx.fillStyle = '#fff3af';
 
+			
+			// PART V
+			// horizontal text alignment
+			ctx.textAlign = "center";
+			// vertical text alignment
+			ctx.textBaseline = "middle";
+
+			// G - draw and fill text using current fill color
+			ctx.fillText('Diana Diaz', 320, 210);	// position modded to account for alignment properties above
+
+
+			// PART IV
 			// set shadow properties
-			ctx.save();
+			ctx.save();	// PART VII
 			ctx.shadowColor = "red";
 			ctx.shadowOffsetX = 0;
 			ctx.shadowOffsetY = 0;
 			ctx.shadowBlur = 30;
 
-			// horizontal alignment
-			ctx.textAlign = "center";
-			// vertical alignment
-			ctx.textBaseline = "middle";
 
-			// G - draw and fill text using current fill color
-			ctx.fillText('Diana Diaz', 320, 240);	// position modded to account for alignment properties above
-
-
-			// I'm using the following palette I found online: https://colorhunt.co/palette/165754
+			// PART III
 			// IGM text
-			ctx.font = 'bold 40pt Lobster';
+			ctx.font = 'bold 40pt Indie Flower';
 			ctx.fillStyle = '#c3f584';
-			ctx.fillText('IGM', 320, 320);	// position modded to account for alignment properties above
+			ctx.fillText('IGM', 320, 290);	// position modded to account for alignment properties above
 
-			// Rectangles
+			ctx.restore(); 	// PART VII		// this "pop" goes back to the last save()
+
+			// Red Squares
 			ctx.fillStyle = '#f65c78';
 			ctx.fillRect(20, 20, 100, 100);
 			ctx.fillRect(520, 360, 100, 100);
-
+			// Yellow Squares
 			ctx.fillStyle = '#fff3af';
 			ctx.fillRect(20, 20, 50, 50);
 			ctx.fillRect(570, 410, 50, 50);
 
-			
-			/*
-			Make your version different:
 
-			//i) Change the yellow rectangle to a different solid color.
-
-			//ii) Change the text to your name, and change the color of the text to 
-			something else. Note: Color can be specified in any legal CSS way, 
-			i.e. pre-defined keyword, hex, shorthand hex, RGB value, RGB percentage, RGBA,
-			or even HSL http://www.w3schools.com/cssref/css_colors_legal.asp
-
-			//iii) Change the font of your name to something else. If you know how to embed
-			web fonts, find something here and use it: http://www.google.com/fonts
-
-			//iv) Add another line of text that reads “IGM”. Make sure that this text
-			appears in a different color and font than your name did.
-
-			//v) Add two squares to your canvas (50 x 50  or so) using 
-			ctx.fillRect(x,y,width,height)- and make sure that the square color is the 
-			same as the first text you drew (your name).
-
-			*/
-
-			ctx.restore(); // this "pop" goes back to the last save()
+			// PART VI
+			// Horizontal lines
 			// 2 more drawing state variables
-			ctx.strokeStyle = "green";
+			ctx.strokeStyle = "#21bf73";
 			ctx.lineWidth = 7;
+			
+			// top line
 			// start defining a path - in this case just a line
 			ctx.beginPath();
 			// move a "pen" to 0, 100
-			ctx.moveTo(0, 100);
+			ctx.moveTo(0, 150);
 			// draw to 640, 100
-			ctx.lineTo(640, 100);
+			ctx.lineTo(640, 150);
 			// close the path
 			ctx.closePath();
 			// stroke the path so we can see it
 			ctx.stroke();
+
+			// bottom line
+			ctx.beginPath();
+			ctx.moveTo(0, 325);
+			ctx.lineTo(640, 325);
+			// close and stroke the path
+			ctx.closePath();
+			ctx.stroke();
+
+
+			// PART IX
+			// Vertical Lines
+			// 2 more drawing state variables
+			ctx.strokeStyle = "#66cccc";
+			ctx.lineWidth = 30;
+			
+			// left line
+			ctx.beginPath();
+			ctx.moveTo(0, 0);
+			ctx.lineTo(0, 480);
+			// close and stroke the path
+			ctx.closePath();
+			ctx.stroke();
+
+			// right line
+			ctx.beginPath();
+			ctx.moveTo(640, 0);
+			ctx.lineTo(640, 480);
+			// close and stroke the path
+			ctx.closePath();
+			ctx.stroke();
+
+
+			// Triangles
+			ctx.fillStyle = "#b0eacd"
+
+			// Top triangles
+			// bottom right
+			ctx.beginPath();
+			ctx.moveTo(70, 70);
+			ctx.lineTo(70, 120);
+			ctx.lineTo(120, 70);
+			// close and stroke the path
+			ctx.closePath();
+			ctx.fill();
+			
+			// bottom left
+			ctx.beginPath();
+			ctx.moveTo(20, 70);
+			ctx.lineTo(20, 120);
+			ctx.lineTo(70, 70);
+			// close and stroke the path
+			ctx.closePath();
+			ctx.fill();
+
+			// top right
+			ctx.beginPath();
+			ctx.moveTo(70, 20);
+			ctx.lineTo(70, 70);
+			ctx.lineTo(120, 20);
+			// close and stroke the path
+			ctx.closePath();
+			ctx.fill();
+
+			// Bottom Triangles	//520, 360
+			// top left
+			ctx.beginPath();
+			ctx.moveTo(520, 410);
+			ctx.lineTo(570, 410);
+			ctx.lineTo(570, 360);
+			// close and stroke the path
+			ctx.closePath();
+			ctx.fill();
+
+			// bottom left
+			ctx.beginPath();
+			ctx.moveTo(520, 460);
+			ctx.lineTo(570, 460);
+			ctx.lineTo(570, 410);
+			// close and stroke the path
+			ctx.closePath();
+			ctx.fill();
+
+			// top right
+			ctx.beginPath();
+			ctx.moveTo(570, 410);
+			ctx.lineTo(620, 410);
+			ctx.lineTo(620, 360);
+			// close and stroke the path
+			ctx.closePath();
+			ctx.fill();
 		}
 	</script>
 </head>
@@ -130,6 +211,7 @@
 		Get a real browser!
 		<!-- The user will only see the above text if their browser is older and doesn't support <canvas> -->
 	</canvas>
+	<!-- PART VIII -->
 	<div id="fontLoader">
 		<p id="indie">Indie Font</p>
 		<p id="lobster">Lobster Font</p>
