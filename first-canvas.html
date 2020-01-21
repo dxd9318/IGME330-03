@@ -75,8 +75,10 @@
         function update(){
             requestAnimationFrame(update);
             drawRandomRect(ctx);
-            drawRandomCircle(ctx);
+            //drawRandomCircle(ctx);
             drawRandomLine(ctx);
+
+            drawSmileys(ctx);
         }
 
         function drawRandomRect(ctx){
@@ -107,12 +109,54 @@
             ctx.restore();
         }
 
+        function drawSmileys(ctx){
+            ctx.save();
+
+            let xCoord = getRandomInt(0, 640);
+            let yCoord = getRandomInt(0, 480);
+            let radius = getRandomInt(70, 120);
+
+            // face base
+            ctx.beginPath();
+            ctx.arc(xCoord, yCoord, radius, 0, Math.PI*2, false);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.globalAlpha = 1;
+            ctx.fill();
+
+            // left eye
+            ctx.beginPath();
+            ctx.arc(xCoord - 30, yCoord - 20, 20, 0, Math.PI*2, false);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+
+            // right eye
+            ctx.beginPath();
+            ctx.arc(xCoord + 30, yCoord - 20, 20, 0, Math.PI*2, false);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+
+            // smile
+            ctx.beginPath();
+            ctx.arc(xCoord, yCoord + 20, 45, 0, Math.PI, false); // semi-circle
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+
+            ctx.restore();
+        }
+
         function drawRandomLine(ctx){
             ctx.save();
 
+            let xCoord = getRandomInt(0, 640);
+            let yCoord = getRandomInt(0, 480);
+
             ctx.beginPath();
-            ctx.moveTo(getRandomInt(0, 640), getRandomInt(0, 480));
-            ctx.lineTo(getRandomInt(0, 640), getRandomInt(0, 480));
+            ctx.moveTo(xCoord, yCoord);
+            ctx.lineTo(xCoord + getRandomInt(0, 50), yCoord + getRandomInt(0, 80));
             ctx.closePath();
             ctx.strokeStyle = getRandomColor();
             ctx.stroke();
