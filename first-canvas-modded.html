@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>First Canvas</title>
+	<style type="text/css">
+	canvas{
+		border:1px solid gray;
+	}
+
+    button{
+        font-size: 1.2em;
+    }
+    section{
+        margin:.5em 0 .5em 0;
+    }
+
+	</style>
+	<script>
+		// #0 - in this class we will always use ECMAScript 5's "strict" mode
+		// See what 'use strict' does here:
+		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode
+		'use strict';
+		
+		// #1 call the `init` function after the pages loads
+		window.onload = init;
+
+        //script-scoped for access by other functions within this scope
+        let ctx;    
+        let createRectangles = true;
+        let paused = true;
+	
+		function init(){
+			console.log("page loaded!");
+			// #2 Now that the page has loaded, start drawing!
+			
+			// A - `canvas` variable points at <canvas> tag
+			let canvas = document.querySelector('canvas');
+			
+			// B - the `ctx` variable points at a "2D drawing context"
+			ctx = canvas.getContext('2d');
+
+            /*cls(ctx);
+
+			// C - all fill operations are now in red
+			ctx.fillStyle = 'red'; 
+			
+			// D - fill a rectangle with the current fill color
+            ctx.fillRect(20,20,600,440); 
+            
+            ctx.fillStyle = 'green'; 
+            //ctx.fillRect(60,60,400,300); 
+
+            // create a path, the hard way
+            ctx.beginPath();
+            ctx.rect(60, 60, 400, 300);
+            ctx.closePath();
+            //ctx.globalAlpha = 0.3;
+            ctx.fill();
+            ctx.strokeStyle = "yellow";
+            ctx.lineWidth = 10;
+            ctx.stroke();
+            
+            //circle
+            ctx.beginPath();
+            //context.arc(x,y,radius,startAngle,endAngle, optional:counter-clockwise);
+            ctx.arc(320, 240, 100, 0, Math.PI *2);
+            ctx.closePath();
+            ctx.fillStyle = "purple";
+            // stroke-fill order will matter. When you stroke, half of the width is inside the path, half is on the outside. 
+            // Depending on the order, the shape will change in appearance because of how these properties overlap visually.
+            ctx.fill();
+            ctx.stroke();
+
+            // line
+            ctx.beginPath();
+            ctx.moveTo(0,0);
+            ctx.lineTo(640, 480);
+            ctx.closePath();
+            ctx.stroke();
+            
+            cls(ctx);
+            */
+
+            setupUI();
+            update();
+		}
+
+        function setupUI(){
+            document.querySelector("#rectanglesCB").onchange = function(e){
+                createRectangles = e.target.checked;
+            };
+
+            document.querySelector("#playButton").onclick = function(){
+                paused = false;
+                update();
+            };
+
+            document.querySelector("#pauseButton").onclick = function(){
+                paused = true;
+            };
+        }
+
+        function update(){
+            if (paused) return;
+            requestAnimationFrame(update);
+            if (createRectangles) drawRandomRect(ctx);
+            //drawRandomCircle(ctx);
+            drawRandomLine(ctx);
+
+            drawSmileys(ctx);
+        }
+
+        function drawRandomRect(ctx){
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.rect(getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 90), getRandomInt(10, 90));
+            ctx.closePath();
+            ctx.lineWidth = getRandomInt(2,5);
+            ctx.fillStyle = getRandomColor();
+            ctx.strokeStyle = getRandomColor();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function drawRandomCircle(ctx){
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.arc(getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(70, 300), 0, Math.PI*2, false);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.globalAlpha = 0.2;
+            ctx.fill();
+            
+            ctx.restore();
+        }
+
+        function drawSmileys(ctx){
+            ctx.save();
+
+            let xCoord = getRandomInt(0, 640);
+            let yCoord = getRandomInt(0, 480);
+            let radius = getRandomInt(70, 120);
+
+            // face base
+            ctx.beginPath();
+            ctx.arc(xCoord, yCoord, radius, 0, Math.PI*2, false);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.globalAlpha = 1;
+            ctx.fill();
+
+            // left eye
+            ctx.beginPath();
+            ctx.arc(xCoord - 30, yCoord - 20, 20, 0, Math.PI*2, false);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+
+            // right eye
+            ctx.beginPath();
+            ctx.arc(xCoord + 30, yCoord - 20, 20, 0, Math.PI*2, false);
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+
+            // smile
+            ctx.beginPath();
+            ctx.arc(xCoord, yCoord + 20, 45, 0, Math.PI, false); // semi-circle
+            ctx.closePath();
+            ctx.fillStyle = getRandomColor();
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function drawRandomLine(ctx){
+            ctx.save();
+
+            let xCoord = getRandomInt(0, 640);
+            let yCoord = getRandomInt(0, 480);
+
+            ctx.beginPath();
+            ctx.moveTo(xCoord, yCoord);
+            ctx.lineTo(xCoord + getRandomInt(0, 50), yCoord + getRandomInt(0, 80));
+            ctx.closePath();
+            ctx.strokeStyle = getRandomColor();
+            ctx.stroke();
+            
+            ctx.restore();
+        }
+
+        // clear screen
+        function cls(ctx){
+            setTimeout(function(){cls(ctx);}, getRandomInt(5000, 10000));  //will occur once every 5 seconds
+            ctx.clearRect(0,0, 640, 480);
+        }
+
+        // handy helper functions!
+        function getRandomColor(){
+            const getByte = _ => 55 + Math.round(Math.random() * 200); // ES6 VERSION
+
+            return `rgba(${getByte()}, ${getByte()}, ${getByte()}, .8)`; // ES6 VERSION
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+	</script>
+</head>
+<body>
+	<canvas width="640" height="480">
+		Get a real browser!
+    </canvas>
+    <section>
+        <button id="playButton">Play</button>
+        <button id="pauseButton">Pause</button>
+    </section>
+    <section>
+        <span>
+            <input type="checkbox" id="rectanglesCB" checked>
+            <label for="rectanglesCB">Create Rectangles</label>
+        </span>
+    </section>
+    <section>
+        <p> Click on screen to "spraypaint" rectangles (you probably want the screensaver to be paused)</p>
+    </section>
+</body>
+</html>
