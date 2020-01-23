@@ -17,19 +17,16 @@
 
 	</style>
 	<script>
-		// #0 - in this class we will always use ECMAScript 5's "strict" mode
-		// See what 'use strict' does here:
-		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode
 		'use strict';
-		
-		// #1 call the `init` function after the pages loads
+	
 		window.onload = init;
 
         //script-scoped for access by other functions within this scope
         let canvas, ctx;    
         let createRectangles = true;
         let paused = true;
-	
+        
+        // set up and update loop
 		function init(){
 			console.log("page loaded!");
 			canvas = document.querySelector('canvas');
@@ -80,6 +77,40 @@
             drawSmileys(ctx);
         }
 
+        // canvas event handling
+        function cls(ctx){
+            setTimeout(function(){cls(ctx);}, getRandomInt(5000, 10000));  //will occur once every 5 seconds
+            ctx.clearRect(0,0, 640, 480);
+        }
+
+        function canvasClicked(e){
+            let rect = e.target.getBoundingClientRect();
+            let mouseX = e.clientX - rect.x;
+            let mouseY = e.clientY - rect.y;
+            console.log(mouseX,mouseY);
+
+            for(let i = 0; i < 10; i++){
+                let x = mouseX + getRandomInt(-100, 100);
+                let y = mouseY + getRandomInt(-100, 100);
+                let width = getRandomInt(20, 50);
+                let height = getRandomInt(20, 50);
+                let color = getRandomColor();
+
+                drawRectangle(ctx, x, y, width, height, color);
+            }
+        }
+
+        /*
+            TO DO:
+                - ADD CHECKBOXES FOR LINES, CIRCLES, AND SMILEYS
+                - CREATE A drawRing() FUNCTION, ACCEPTS innerRadius AND outRadius
+                - CREATE A drawTriangle() FUNCTION, ACCEPTS width AND height
+                - ADD linedash PARAMETER TO drawRectangle(), drawLine(), AND drawCircle()
+
+                - WATCH AND FOLLOW DEMO VIDEOS 6 & 7 ON IIFEs
+        */
+
+
         // drawing functions
         function drawRandomRect(ctx){
             drawRectangle(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 90), getRandomInt(10, 90), getRandomColor(), getRandomInt(2,5), getRandomColor());
@@ -111,30 +142,7 @@
             drawLine(ctx, getRandomInt(0, 640), getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(0, 640), getRandomInt(2, 10), getRandomColor());
         }
 
-        // canvas handling
-        function cls(ctx){
-            setTimeout(function(){cls(ctx);}, getRandomInt(5000, 10000));  //will occur once every 5 seconds
-            ctx.clearRect(0,0, 640, 480);
-        }
-
-        function canvasClicked(e){
-            let rect = e.target.getBoundingClientRect();
-            let mouseX = e.clientX - rect.x;
-            let mouseY = e.clientY - rect.y;
-            console.log(mouseX,mouseY);
-
-            for(let i = 0; i < 10; i++){
-                let x = mouseX + getRandomInt(-100, 100);
-                let y = mouseY + getRandomInt(-100, 100);
-                let width = getRandomInt(20, 50);
-                let height = getRandomInt(20, 50);
-                let color = getRandomColor();
-
-                drawRectangle(ctx, x, y, width, height, color);
-            }
-        }
-
-        // handy shape-drawing helper functions!
+        // shape-drawing helper functions
         function drawRectangle(ctx, x, y, width, height, fillStyle="black", lineWidth=0, strokeStyle="black"){
             ctx.save();
 
