@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Canvas 1</title>
+	<style type="text/css">
+	body{
+		background: #dddddd;
+ 	}
+
+	canvas{
+		background: #ffffff;
+		cursor: pointer;
+		margin-left: 10px;
+		margin-top: 10px;
+		box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+ 	}
+	
+	</style>
+	
+	<script>
+		"use strict";
+		// #1 - wait for page to load
+		window.onload = init; 
+		
+		function init(){
+			//console.log("init() called");
+			// #2 - get pointer to <canvas> element on page
+			let canvas = document.querySelector('canvas');
+			
+			// #3 - get pointer to "drawing context" and drawing API
+			let ctx = canvas.getContext('2d');
+			
+			/* #4 - start drawing! */
+			// sky
+			ctx.fillStyle = "lightblue";
+			ctx.fillRect(0,0,750, 500);
+			
+			// ground
+			ctx.fillStyle = "darkgreen";
+			ctx.fillRect(0,400,750, 100);
+			
+			ctx.beginPath();
+			ctx.moveTo(0,400);
+			ctx.lineTo(750,400);
+			ctx.closePath();
+			ctx.lineWidth = 5;
+			ctx.strokeStyle = "green";
+			ctx.stroke();
+
+			// tree
+			ctx.fillStyle = "brown";
+			// trunk base
+			ctx.beginPath();
+			ctx.moveTo(70,380);
+			ctx.lineTo(140,380);
+			ctx.lineTo(160,430);
+			ctx.lineTo(50,430);
+			ctx.closePath();
+			ctx.fill();
+			// trunk body
+			ctx.fillRect(70,120,70, 260);
+			//branches
+
+			// flower blossoms
+			for(let i = 0; i < 50; i++){
+				//tree petals
+				drawPetals(ctx, "pink", getRandomInt(3, 12), getRandomInt(4, 16));
+				drawPetals(ctx, "hotpink", getRandomInt(3, 12), getRandomInt(4, 16));
+				drawPetals(ctx, "white", getRandomInt(3, 12), getRandomInt(4, 16));
+			}
+
+			// face
+			// set state variables
+			ctx.fillStyle = "yellow";
+			ctx.strokeStyle = "lightyellow";
+			ctx.lineWidth = 5;
+
+			// face base
+			ctx.beginPath();
+			ctx.arc(375, 250, 200, 0, Math.PI*2, false); 
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+			
+			// mouth
+			drawCircle(ctx, 375, 260, 100, "black");
+			drawCircle(ctx, 375, 245, 105, "yellow");
+
+			// eyelashes
+			drawCircle(ctx, 275, 225, 10, "black");
+			drawCircle(ctx, 475, 225, 10, "black");
+
+			drawCircle(ctx, 275, 215, 10, "yellow");
+			drawCircle(ctx, 475, 215, 10, "yellow");
+
+			// eyes
+			drawCircle(ctx, 305, 240, 30, "black");
+			drawCircle(ctx, 445, 240, 30, "black");
+
+			drawCircle(ctx, 305, 255, 35, "yellow");
+			drawCircle(ctx, 445, 255, 35, "yellow");
+
+			// cheeks
+			drawCircle(ctx, 255, 260, 30, "pink");
+			drawCircle(ctx, 495, 260, 30, "pink");
+
+			
+		}
+
+		// helpers
+		//taken from phyllotaxis assignment
+		function drawPetals(ctx, color, hDivisor, wDivisor){
+			const canvasWidth = 750, canvasHeight = 500;
+			let n = 0;
+			const c = 4; // `c` is the "padding" between the dots
+			const divergence = 137.9;
+
+			for(let i = 0; i < 100; i++){
+				// `a` is the angle
+				// `r` is the radius from the center of the flower
+				let a = n * dtr(137.5);
+				let r = c * Math.sqrt(n);
+
+				let x = r * Math.cos(a) + canvasWidth/wDivisor;
+				let y = r * Math.sin(a) + canvasHeight/hDivisor;
+
+				drawCircle(ctx,x,y,2,color);
+
+				n++
+			}
+		}
+		
+		function dtr(degrees){
+			return degrees * (Math.PI/180);
+		}
+
+		function drawCircle(ctx,x,y,radius,color){
+			ctx.save();
+			ctx.fillStyle = color;
+			ctx.beginPath();
+			ctx.arc(x,y,radius,0,Math.PI * 2);
+			ctx.closePath();
+			ctx.fill();
+			ctx.restore();
+		}
+
+		// taken from first-canvas assignment
+		function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+		//console.log("In bottom of <script> tag!");
+	</script>
+	
+</head>
+<body>
+	<canvas width="750" height="500">
+         Get a browser that supports Canvas!
+         <!-- The user will only see the above text if their browser is older and doesn't support <canvas> -->
+	
+      </canvas>
+</body>
+</html>
