@@ -50,6 +50,11 @@
 		y = canvasHeight / 2 + Math.sqrt(x%50) * 5;
 		drawCircle(ctx, x, y, 4, "yellow");
 
+		// tangent wave
+		y = canvasHeight / 2 + Math.tan(angle) * amplitude;
+		drawCircle(ctx, x, y, 4, "cyan");
+
+
 		if (x > canvasWidth) x = 0;
     }
 
