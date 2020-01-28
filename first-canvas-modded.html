@@ -17,6 +17,8 @@
 
 	</style>
 	<script>
+    (function(){    //start of IIFE
+
 		'use strict';
 	
 		window.onload = init;
@@ -26,24 +28,37 @@
         let createLines = true, createTriangles = true, createRectangles = true, createCircles = true, 
             createRings = true, createSmileys = true;
         let paused = true;
+
+        const canvasWidth = 640, canvasHeight = 480;
+        // const when pointing to an obj means you can't change the reference to any other object
+        // BUT you can still change the properties of the very object you're pointing to.
+        // Use Object.freeze to avoid that.
+        const drawParams = Object.freeze({
+            "minRectSpan": 10,
+            "maxRectSpan": 90,
+            "minStrokeWidth": 2,
+            "maxStrokeWidth": 5,
+        });
         
         // set up and update loop
 		function init(){
 			console.log("page loaded!");
 			canvas = document.querySelector('canvas');
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
 			ctx = canvas.getContext('2d');
 
             //cls(ctx);
 
             // rectangles
-            drawRectangle(ctx, 20, 20, 600, 440, "red");
+            drawRectangle(ctx, 20, 20, canvasWidth - 40, canvasHeight - 40, "red");
             drawRectangle(ctx, 60, 60, 400, 300, "green", 10, "yellow");
 
             // circle
-            drawCircle(ctx, 320, 240, 100, 0, Math.PI * 2, false, "purple", 1, 10, "yellow");
+            drawCircle(ctx, canvasWidth / 2, canvasHeight / 2, 100, 0, Math.PI * 2, false, "purple", 1, 10, "yellow");
 
             // line
-            drawLine(ctx, 0, 0, 640, 480, 10, "yellow");
+            drawLine(ctx, 0, 0, canvasWidth, canvasHeight, 10, "yellow");
             
             //cls(ctx);
 
@@ -99,10 +114,11 @@
             if (createSmileys) drawSmileys(ctx);
         }
 
+
         // canvas event handling
         function cls(ctx){
             setTimeout(function(){cls(ctx);}, getRandomInt(5000, 10000));  //will occur once every 5 seconds
-            ctx.clearRect(0,0, 640, 480);
+            ctx.clearRect(0,0, canvasWidth, canvasHeight);
         }
 
         function canvasClicked(e){
@@ -122,30 +138,31 @@
             }
         }
 
+
         // drawing functions
         function drawRandomLine(ctx){
-            drawLine(ctx, getRandomInt(0, 640), getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(0, 640), getRandomInt(2, 10), getRandomColor());
+            drawLine(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(2, 10), getRandomColor());
         }
 
         function drawRandomTriangle(ctx){
-            drawTriangle(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 70), getRandomInt(10, 70), getRandomColor(), getRandomInt(1, 5), getRandomColor());
+            drawTriangle(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(10, 70), getRandomInt(10, 70), getRandomColor(), getRandomInt(1, 5), getRandomColor());
         }
         
         function drawRandomRect(ctx){
-            drawRectangle(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 90), getRandomInt(10, 90), getRandomColor(), getRandomInt(2,5), getRandomColor());
+            drawRectangle(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(drawParams.minRectSpan, drawParams.maxRectSpan), getRandomInt(drawParams.minRectSpan, drawParams.maxRectSpan), getRandomColor(), getRandomInt(drawParams.minStrokeWidth,drawParams.maxStrokeWidth), getRandomColor());
         }
 
         function drawRandomCircle(ctx){
-            drawCircle(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(70, 150), 0, Math.PI*2, false, getRandomColor());
+            drawCircle(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(70, 150), 0, Math.PI*2, false, getRandomColor());
         }
 
         function drawRandomRing(ctx){
-            drawRing(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(80,100), getRandomInt(20,50), getRandomColor());
+            drawRing(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(80,100), getRandomInt(20,50), getRandomColor());
         }
 
         function drawSmileys(ctx){
-            let xCoord = getRandomInt(0, 640);
-            let yCoord = getRandomInt(0, 480);
+            let xCoord = getRandomInt(0, canvasWidth);
+            let yCoord = getRandomInt(0, canvasHeight);
             let radius = getRandomInt(70, 120);
 
             // face base
@@ -259,12 +276,12 @@
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
+
+    })(); // end of IIFE
 	</script>
 </head>
 <body>
-	<canvas width="640" height="480">
-		Get a real browser!
-    </canvas>
+	<canvas>Get a real browser!</canvas>
     <section>
         <button id="playButton">Play</button>
         <button id="pauseButton">Pause</button>
