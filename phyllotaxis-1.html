@@ -9,8 +9,8 @@
 	const canvasWidth = 400, canvasHeight = 300;
 	let ctx;
 	let n = 0;
-	const c = 6; // `c` is the "padding" between the dots
-	const divergence = 137.9;
+	const c = 9; // `c` is the "padding" between the dots
+	const divergence = 129.9;
 
 	window.onload = init;
 
@@ -45,19 +45,19 @@
 		//let color = `rgb(${n % 256},0,255)`;
 		
 		// 2 - change RGB based on angle of dot
-		//let aDegrees = n * divergence;
-		//let color = `rgb(${aDegrees % 256},0,255)`;
+		let aDegrees = n * divergence;
+		let color = `rgb(${aDegrees % 256},0,255)`;
 
 		// 3 - change HSL based on what quadrant the petal is in
 		//let aDegrees = n * divergence;
 		//let color = `hsl(${aDegrees % 360},100%,50%)`;
 
 		// 4 - change HSL based on the value of n
-		let aDegrees = n * divergence;
-		let color = `hsl(${n/5 % 360},100%,50%)`;
+		//let aDegrees = n * divergence;
+		//let color = `hsl(${n/5 % 360},100%,50%)`;
 		
 		//drawCircle(ctx,x,y,2,color);
-		drawHeart(ctx,x,y,2,color);
+		drawHeart(ctx,x,y,5,color);
 
 		n++;
 	}
