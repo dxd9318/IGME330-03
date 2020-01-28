@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <script>
+        (function () {
+            let playerName = "Mario";
+            let highScore = 1000;
+        })();
+
+        // `highScore` and `playerName` are now local variables of the IIFE, and thus NOT 
+        // accessible from this outside scope
+        // (but what if we have code that needs access to these, without being to modify them?)
+        console.log(playerName, highScore);
+    </script>
+
+    <p>
+        Use an IIFE - everything is private
+    </p>
+</body>
+
+</html>

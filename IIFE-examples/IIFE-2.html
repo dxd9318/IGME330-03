@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <script>
+        let scoreTracker = (function () {
+            let playerName = "Mario"; // this is still "private"
+            let highScore = 1000; 		// this is still "private"
+
+            function privateSecretMethod() {
+                // do secret stuff
+            }
+
+            // public stuff
+            function incrementHighScore() {
+                highScore++;
+            }
+
+            function resetHighScore() {
+                highScore = 0;
+            }
+
+            function getHighScore() {
+                return highScore;
+            }
+
+            // return the "public" interface
+            return {
+                incrementHighScore,
+                resetHighScore,
+                getHighScore
+            };
+
+        })();
+
+        // `highScore` is NOT accessible from the outside scope
+        //console.log(highScore);
+
+        // what will happen here?
+        console.log("scoreTracker.highScore=" + scoreTracker.highScore); // ERROR or ??
+        scoreTracker.highScore = 2000; // ERROR or ??
+        console.log("scoreTracker.highScore=" + scoreTracker.highScore); // ERROR or ??
+        scoreTracker.incrementHighScore();
+        console.log("scoreTracker.highScore=" + scoreTracker.highScore); // ERROR or ??
+        console.log("scoreTracker.getHighScore()=" + scoreTracker.getHighScore());
+
+        console.log("---------------------------------------------------------------");
+
+        // let's use the "public" interface of `scoreTracker`
+        scoreTracker.incrementHighScore();
+        console.log("scoreTracker.getHighScore()=" + scoreTracker.getHighScore());
+        scoreTracker.resetHighScore();
+        scoreTracker.incrementHighScore();
+        console.log("scoreTracker.getHighScore()=" + scoreTracker.getHighScore());
+
+    </script>
+    <p>
+        Use an IIFE for privacy - but `return` everything that needs to be public to a variable named `scoreTracker`
+    </p>
+</body>
+
+</html>

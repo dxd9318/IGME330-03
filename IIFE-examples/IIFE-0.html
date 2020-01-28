@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <script>
+        // Imagine that you have a game, with a `playerName` and a `highScore` you are keeping track of
+        // `playerName` is in "global scope" with all of the built-in browser symbols,
+        // and is thus visible on this entire script, and from any other script.
+        // `highScore` is in "script scope", and thus visible on this entire script, and
+        // from any other script. 
+        // Go ahead and change these values from the console - not too secure, eh?
+        // The players can raise their high score to anything they want to!
+        var playerName = "Mario";
+        let highScore = 1000;
+        console.log(playerName, highScore);
+    </script>
+
+    <p>
+        No IIFE! Everything is public and visible! Go ahead and try modifying both `playerName` and `highScore` in the
+        console!
+    </p>
+</body>
+
+</html>
