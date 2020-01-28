@@ -92,6 +92,7 @@
             };
 
             document.querySelector("#playButton").onclick = function(){
+                if (!paused) return;    //without this line, spamming the play button will cause it to play faster and faster.
                 paused = false;
                 update();
             };
@@ -296,12 +297,12 @@
 
             <input type="checkbox" id="rectanglesCB" checked>
             <label for="rectanglesCB">Create Rectangles</label>
-
+        </span>
+        </br></br>
+        <span>
             <input type="checkbox" id="circlesCB" checked>
             <label for="circlesCB">Create Circles</label>
-        </span>
-        </br>
-        <span>
+
             <input type="checkbox" id="ringsCB" checked>
             <label for="ringsCB">Create Rings</label>
 
