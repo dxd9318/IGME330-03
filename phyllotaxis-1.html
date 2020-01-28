@@ -9,7 +9,7 @@
 	const canvasWidth = 400, canvasHeight = 300;
 	let ctx;
 	let n = 0;
-	const c = 4; // `c` is the "padding" between the dots
+	const c = 6; // `c` is the "padding" between the dots
 	const divergence = 137.9;
 
 	window.onload = init;
@@ -56,7 +56,8 @@
 		let aDegrees = n * divergence;
 		let color = `hsl(${n/5 % 360},100%,50%)`;
 		
-		drawCircle(ctx,x,y,2,color);
+		//drawCircle(ctx,x,y,2,color);
+		drawHeart(ctx,x,y,2,color);
 
 		n++;
 	}
@@ -83,6 +84,21 @@
 		ctx.arc(x,y,radius,0,Math.PI * 2);
 		ctx.closePath();
 		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(x + (radius * 2),y,radius,0,Math.PI * 2);
+		ctx.closePath();
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(x - radius, y);
+		ctx.lineTo(x + radius,y + (radius * 2));
+		ctx.lineTo(x + (radius * 3),y);
+		ctx.closePath();
+		ctx.fill();
+		ctx.strokeStyle = color;
+		ctx.stroke();
+
 		ctx.restore();
 	}
 
