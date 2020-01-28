@@ -15,7 +15,8 @@
         margin:.5em 0 .5em 0;
     }
 
-	</style>
+    </style>
+    <script src="dxdLIB.js"></script>
 	<script>
     (function(){    //start of IIFE
 
@@ -51,14 +52,14 @@
             //cls(ctx);
 
             // rectangles
-            drawRectangle(ctx, 20, 20, canvasWidth - 40, canvasHeight - 40, "red");
-            drawRectangle(ctx, 60, 60, 400, 300, "green", 10, "yellow");
+            dxdLIB.drawRectangle(ctx, 20, 20, canvasWidth - 40, canvasHeight - 40, "red");
+            dxdLIB.drawRectangle(ctx, 60, 60, 400, 300, "green", 10, "yellow");
 
             // circle
-            drawCircle(ctx, canvasWidth / 2, canvasHeight / 2, 100, 0, Math.PI * 2, false, "purple", 1, 10, "yellow");
+            dxdLIB.drawCircle(ctx, canvasWidth / 2, canvasHeight / 2, 100, 0, Math.PI * 2, false, "purple", 1, 10, "yellow");
 
             // line
-            drawLine(ctx, 0, 0, canvasWidth, canvasHeight, 10, "yellow");
+            dxdLIB.drawLine(ctx, 0, 0, canvasWidth, canvasHeight, 10, "yellow");
             
             //cls(ctx);
 
@@ -135,149 +136,49 @@
                 let height = getRandomInt(20, 50);
                 let color = getRandomColor();
 
-                drawRectangle(ctx, x, y, width, height, color);
+                dxdLIB.drawRectangle(ctx, x, y, width, height, color);
             }
         }
 
 
         // drawing functions
         function drawRandomLine(ctx){
-            drawLine(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(2, 10), getRandomColor());
+            dxdLIB.drawLine(ctx, dxdLIB.getRandomInt(0, canvasWidth), dxdLIB.getRandomInt(0, canvasHeight), dxdLIB.getRandomInt(0, canvasWidth), dxdLIB.getRandomInt(0, canvasHeight), dxdLIB.getRandomInt(2, 10), dxdLIB.getRandomColor());
         }
 
         function drawRandomTriangle(ctx){
-            drawTriangle(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(10, 70), getRandomInt(10, 70), getRandomColor(), getRandomInt(1, 5), getRandomColor());
+            dxdLIB.drawTriangle(ctx, dxdLIB.getRandomInt(0, canvasWidth), dxdLIB.getRandomInt(0, canvasHeight), dxdLIB.getRandomInt(10, 70), dxdLIB.getRandomInt(10, 70), dxdLIB.getRandomColor(), dxdLIB.getRandomInt(1, 5), dxdLIB.getRandomColor());
         }
         
         function drawRandomRect(ctx){
-            drawRectangle(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(drawParams.minRectSpan, drawParams.maxRectSpan), getRandomInt(drawParams.minRectSpan, drawParams.maxRectSpan), getRandomColor(), getRandomInt(drawParams.minStrokeWidth,drawParams.maxStrokeWidth), getRandomColor());
+            dxdLIB.drawRectangle(ctx, dxdLIB.getRandomInt(0, canvasWidth), dxdLIB.getRandomInt(0, canvasHeight), dxdLIB.getRandomInt(drawParams.minRectSpan, drawParams.maxRectSpan), dxdLIB.getRandomInt(drawParams.minRectSpan, drawParams.maxRectSpan), dxdLIB.getRandomColor(), dxdLIB.getRandomInt(drawParams.minStrokeWidth,drawParams.maxStrokeWidth), dxdLIB.getRandomColor());
         }
 
         function drawRandomCircle(ctx){
-            drawCircle(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(70, 150), 0, Math.PI*2, false, getRandomColor());
+            dxdLIB.drawCircle(ctx, dxdLIB.getRandomInt(0, canvasWidth), dxdLIB.getRandomInt(0, canvasHeight), dxdLIB.getRandomInt(70, 150), 0, Math.PI*2, false, dxdLIB.getRandomColor());
         }
 
         function drawRandomRing(ctx){
-            drawRing(ctx, getRandomInt(0, canvasWidth), getRandomInt(0, canvasHeight), getRandomInt(80,100), getRandomInt(20,50), getRandomColor());
+            dxdLIB.drawRing(ctx, dxdLIB.getRandomInt(0, canvasWidth), dxdLIB.getRandomInt(0, canvasHeight), dxdLIB.getRandomInt(80,100), dxdLIB.getRandomInt(20,50), dxdLIB.getRandomColor());
         }
 
         function drawSmileys(ctx){
-            let xCoord = getRandomInt(0, canvasWidth);
-            let yCoord = getRandomInt(0, canvasHeight);
-            let radius = getRandomInt(70, 120);
+            let xCoord = dxdLIB.getRandomInt(0, canvasWidth);
+            let yCoord = dxdLIB.getRandomInt(0, canvasHeight);
+            let radius = dxdLIB.getRandomInt(70, 120);
 
             // face base
-            drawCircle(ctx, xCoord, yCoord, radius, 0, Math.PI*2, false, getRandomColor(), 1.0);
+            dxdLIB.drawCircle(ctx, xCoord, yCoord, radius, 0, Math.PI*2, false, dxdLIB.getRandomColor(), 1.0);
 
             // left eye
-            drawCircle(ctx, xCoord - 30, yCoord - 20, 20, 0, Math.PI*2, false, getRandomColor(), 1.0);
+            dxdLIB.drawCircle(ctx, xCoord - 30, yCoord - 20, 20, 0, Math.PI*2, false, dxdLIB.getRandomColor(), 1.0);
 
             // right eye
-            drawCircle(ctx, xCoord + 30, yCoord - 20, 20, 0, Math.PI*2, false, getRandomColor(), 1.0);
+            dxdLIB.drawCircle(ctx, xCoord + 30, yCoord - 20, 20, 0, Math.PI*2, false, dxdLIB.getRandomColor(), 1.0);
 
             // smile    // semi-circle
-            drawCircle(ctx, xCoord, yCoord + 20, 45, 0, Math.PI, false, getRandomColor(), 1.0);
+            dxdLIB.drawCircle(ctx, xCoord, yCoord + 20, 45, 0, Math.PI, false, dxdLIB.getRandomColor(), 1.0);
         }
-
-        
-        // shape-drawing helper functions
-        function drawLine(ctx, startX, startY, endX, endY, lineWidth=2, strokeStyle="black"){
-            ctx.save();
-
-            ctx.beginPath();
-            ctx.moveTo(startX, startY);
-            ctx.lineTo(endX, endY);
-            ctx.closePath();
-
-            ctx.lineWidth = lineWidth;
-            ctx.strokeStyle = strokeStyle;
-            ctx.stroke();
-            
-            ctx.restore();
-        }
-
-        function drawTriangle(ctx, topX, topY, width, height, fillStyle="black", lineWidth=0, strokeStyle="black"){
-            ctx.save();
-
-            ctx.beginPath();
-            ctx.moveTo(topX, topY);
-            ctx.lineTo(topX - (width / 2), topY + height);
-            ctx.lineTo(topX + (width / 2), topY + height);
-            ctx.closePath();
-            ctx.fillStyle = fillStyle;
-            ctx.fill();
-
-            if (lineWidth > 0){
-                ctx.lineWidth = lineWidth;
-                ctx.strokeStyle = strokeStyle;
-                ctx.stroke();
-            }
-            
-            ctx.restore();
-        }
-
-        function drawRectangle(ctx, x, y, width, height, fillStyle="black", lineWidth=0, strokeStyle="black"){
-            ctx.save();
-
-            ctx.fillStyle = fillStyle;
-            ctx.beginPath();
-            ctx.rect(x, y, width, height);
-            ctx.closePath();
-            ctx.fill();
-
-            if (lineWidth > 0){
-                ctx.lineWidth = lineWidth;
-                ctx.strokeStyle = strokeStyle;
-                ctx.stroke();
-            }
-
-            ctx.restore();
-        }
-
-        function drawCircle(ctx, x, y, radius, startAngle, endAngle, ccw=false, fillStyle="black", alphaValue=0.2, lineWidth=0, strokeStyle="black"){
-            ctx.save();
-
-            ctx.fillStyle = fillStyle;
-            ctx.globalAlpha = alphaValue;
-            ctx.beginPath();
-            ctx.arc(x, y, radius, startAngle, endAngle, ccw);
-            ctx.closePath();
-            ctx.fill();
-
-            if (lineWidth > 0){
-                ctx.lineWidth = lineWidth;
-                ctx.strokeStyle = strokeStyle;
-                ctx.stroke();
-            }
-
-            ctx.restore();
-        }
-
-        function drawRing(ctx, x, y, innerRadius, outerRadius, fillStyle="black"){
-            ctx.save();
-
-            ctx.fillStyle = fillStyle;
-            ctx.beginPath();
-            ctx.arc(x, y, outerRadius, 0, Math.PI*2, false);
-            ctx.arc(x, y, innerRadius, 0, Math.PI*2, true);
-            ctx.closePath();
-            ctx.fill();
-
-            ctx.restore();
-        }
-
-
-        // get random values
-        function getRandomColor(){
-            const getByte = _ => 55 + Math.round(Math.random() * 200); // ES6 VERSION
-
-            return `rgba(${getByte()}, ${getByte()}, ${getByte()}, .8)`; // ES6 VERSION
-        }
-
-        function getRandomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-
     })(); // end of IIFE
 	</script>
 </head>
