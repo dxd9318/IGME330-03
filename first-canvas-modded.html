@@ -23,7 +23,8 @@
 
         //script-scoped for access by other functions within this scope
         let canvas, ctx;    
-        let createRectangles = true;
+        let createLines = true, createTriangles = true, createRectangles = true, createCircles = true, 
+            createRings = true, createSmileys = true;
         let paused = true;
         
         // set up and update loop
@@ -51,8 +52,28 @@
 		}
 
         function setupUI(){
+            document.querySelector("#linesCB").onchange = function(e){
+                createLines = e.target.checked;
+            };
+
+            document.querySelector("#trianglesCB").onchange = function(e){
+                createTriangles = e.target.checked;
+            };
+
             document.querySelector("#rectanglesCB").onchange = function(e){
                 createRectangles = e.target.checked;
+            };
+
+            document.querySelector("#circlesCB").onchange = function(e){
+                createCircles = e.target.checked;
+            };
+
+            document.querySelector("#ringsCB").onchange = function(e){
+                createRings = e.target.checked;
+            };
+
+            document.querySelector("#smileysCB").onchange = function(e){
+                createSmileys = e.target.checked;
             };
 
             document.querySelector("#playButton").onclick = function(){
@@ -70,11 +91,12 @@
         function update(){
             if (paused) return;
             requestAnimationFrame(update);
+            if (createLines) drawRandomLine(ctx);
+            if (createTriangles) drawRandomTriangle(ctx);
             if (createRectangles) drawRandomRect(ctx);
-            //drawRandomCircle(ctx);
-            drawRandomLine(ctx);
-
-            drawSmileys(ctx);
+            if (createCircles) drawRandomCircle(ctx);
+            if (createRings) drawRandomRing(ctx);
+            if (createSmileys) drawSmileys(ctx);
         }
 
         // canvas event handling
@@ -100,24 +122,25 @@
             }
         }
 
-        /*
-            TO DO:
-                - ADD CHECKBOXES FOR LINES, CIRCLES, AND SMILEYS
-                - CREATE A drawRing() FUNCTION, ACCEPTS innerRadius AND outRadius
-                - CREATE A drawTriangle() FUNCTION, ACCEPTS width AND height
-                - ADD linedash PARAMETER TO drawRectangle(), drawLine(), AND drawCircle()
-
-                - WATCH AND FOLLOW DEMO VIDEOS 6 & 7 ON IIFEs
-        */
-
-
         // drawing functions
+        function drawRandomLine(ctx){
+            drawLine(ctx, getRandomInt(0, 640), getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(0, 640), getRandomInt(2, 10), getRandomColor());
+        }
+
+        function drawRandomTriangle(ctx){
+            drawTriangle(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 70), getRandomInt(10, 70), getRandomColor(), getRandomInt(1, 5), getRandomColor());
+        }
+        
         function drawRandomRect(ctx){
             drawRectangle(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 90), getRandomInt(10, 90), getRandomColor(), getRandomInt(2,5), getRandomColor());
         }
 
         function drawRandomCircle(ctx){
             drawCircle(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(70, 150), 0, Math.PI*2, false, getRandomColor());
+        }
+
+        function drawRandomRing(ctx){
+            drawRing(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(80,100), getRandomInt(20,50), getRandomColor());
         }
 
         function drawSmileys(ctx){
@@ -138,11 +161,43 @@
             drawCircle(ctx, xCoord, yCoord + 20, 45, 0, Math.PI, false, getRandomColor(), 1.0);
         }
 
-        function drawRandomLine(ctx){
-            drawLine(ctx, getRandomInt(0, 640), getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(0, 640), getRandomInt(2, 10), getRandomColor());
+        
+        // shape-drawing helper functions
+        function drawLine(ctx, startX, startY, endX, endY, lineWidth=2, strokeStyle="black"){
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.closePath();
+
+            ctx.lineWidth = lineWidth;
+            ctx.strokeStyle = strokeStyle;
+            ctx.stroke();
+            
+            ctx.restore();
         }
 
-        // shape-drawing helper functions
+        function drawTriangle(ctx, topX, topY, width, height, fillStyle="black", lineWidth=0, strokeStyle="black"){
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.moveTo(topX, topY);
+            ctx.lineTo(topX - (width / 2), topY + height);
+            ctx.lineTo(topX + (width / 2), topY + height);
+            ctx.closePath();
+            ctx.fillStyle = fillStyle;
+            ctx.fill();
+
+            if (lineWidth > 0){
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = strokeStyle;
+                ctx.stroke();
+            }
+            
+            ctx.restore();
+        }
+
         function drawRectangle(ctx, x, y, width, height, fillStyle="black", lineWidth=0, strokeStyle="black"){
             ctx.save();
 
@@ -180,20 +235,19 @@
             ctx.restore();
         }
 
-        function drawLine(ctx, startX, startY, endX, endY, lineWidth=2, strokeStyle="black"){
+        function drawRing(ctx, x, y, innerRadius, outerRadius, fillStyle="black"){
             ctx.save();
 
+            ctx.fillStyle = fillStyle;
             ctx.beginPath();
-            ctx.moveTo(startX, startY);
-            ctx.lineTo(endX, endY);
+            ctx.arc(x, y, outerRadius, 0, Math.PI*2, false);
+            ctx.arc(x, y, innerRadius, 0, Math.PI*2, true);
             ctx.closePath();
+            ctx.fill();
 
-            ctx.lineWidth = lineWidth;
-            ctx.strokeStyle = strokeStyle;
-            ctx.stroke();
-            
             ctx.restore();
         }
+
 
         // get random values
         function getRandomColor(){
@@ -217,8 +271,25 @@
     </section>
     <section>
         <span>
+            <input type="checkbox" id="linesCB" checked>
+            <label for="linesCB">Create Lines</label>
+
+            <input type="checkbox" id="trianglesCB" checked>
+            <label for="trianglesCB">Create Triangles</label>
+
             <input type="checkbox" id="rectanglesCB" checked>
             <label for="rectanglesCB">Create Rectangles</label>
+
+            <input type="checkbox" id="circlesCB" checked>
+            <label for="circlesCB">Create Circles</label>
+        </span>
+        </br>
+        <span>
+            <input type="checkbox" id="ringsCB" checked>
+            <label for="ringsCB">Create Rings</label>
+
+            <input type="checkbox" id="smileysCB" checked>
+            <label for="smileysCB">Create Smileys</label>
         </span>
     </section>
     <section>
