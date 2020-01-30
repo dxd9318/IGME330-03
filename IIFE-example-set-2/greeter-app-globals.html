@@ -2,20 +2,7 @@
 
 <head>
     <title>Greeter App with Globals</title>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-
-        button,
-        input {
-            font-size: 1.2em;
-        }
-
-        li {
-            margin-bottom: 1em;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
 </head>
 
 <body>
@@ -29,7 +16,7 @@
     <p id="output">???</p>
     <hr>
     <h2>???</h2>
-    <p id="instructions">???</p>
+    <!-- <p id="instructions">???</p>
 
     <ol>
         <li>In a web browser, test this app, and then look over the HTML/CSS and JS code.</li>
@@ -37,15 +24,15 @@
             <code>greetify("Fred Jones")</code> and <code>shoutify("Norville Rogers")</code></li>
         <li>Open up the debugger, put in a breakpoint near the bottom of the &lt;script> tag:
             <ul>
-                <li>What is the <i>scope</i> of <code>appData</code>?</li>
-                <li>What is the <i>scope</i> of all 5 functions?</li>
+                <li>What is the <i>scope</i> of <code>appData</code>?  <span class="answer">-- It's script-scoped.</span></li>
+                <li>What is the <i>scope</i> of all 5 functions?  <span class="answer">-- It's global-scoped.</span></li>
             </ul>
         </li>
         <li>Wrap the contents of the &lt;script> tag in an
             <href="https://developer.mozilla.org/en-US/docs/Glossary/IIFE">IIFE </a>, and open the debugger: <ul>
-        <li>Now what is the <i>scope</i> of <code>appData</code>?</li>
-        <li>Now what is the <i>scope</i> of all 5 functions?</li>
-        <li>In the console, test the <code>greetify()</code> and <code>shoutify()</code> functions again - what happens?
+        <li>Now what is the <i>scope</i> of <code>appData</code>?  <span class="answer">-- It's function-scoped.</span></li>
+        <li>Now what is the <i>scope</i> of all 5 functions?  <span class="answer">-- It's function-scoped (they're now closures).</span></li>
+        <li>In the console, test the <code>greetify()</code> and <code>shoutify()</code> functions again - what happens?  <span class="answer">-- "Uncaught ReferenceError: (functionName) is not defined"</span>
         </li>
         </ul>
         </li>
@@ -87,53 +74,9 @@
         </li>
         <li>Test the app and be sure that it still works the same</li>
         <li>This is basically how Project 1 will need to be structured!</li>
-    </ol>
-
-    <script>
-        "use strict";
-
-        window.onload = init;
-
-        const appData = {
-            appHeadingText: "Greeter App",
-            appInstructionsHeading: "Instructions for this exercise",
-            appInstructionsText: "We are going to refactor the code in this example so that all the JS is wrapped in an IFFE, and has been moved to external files:"
-        };
-
-        function init() {
-            document.querySelector("h1").innerHTML = appData.appHeadingText;
-            document.querySelector("h2").innerHTML = appData.appInstructionsHeading;
-            document.querySelector("#instructions").innerHTML = appData.appInstructionsText;
-
-            document.querySelector("#greetButton").onclick = greetButtonClicked;
-            document.querySelector("#shoutButton").onclick = shoutButtonClicked;
-        }
-
-        function greetButtonClicked() {
-            let firstName = document.querySelector("#firstName").value;
-            let lastName = document.querySelector("#lastName").value;
-            output.innerHTML = greetify(`${firstName} ${lastName}`);
-        }
-
-        function shoutButtonClicked() {
-            let firstName = document.querySelector("#firstName").value;
-            let lastName = document.querySelector("#lastName").value;
-            output.innerHTML = shoutify(`${firstName} ${lastName}`);
-        }
-
-        function greetify(fullName) {
-            let greetings = ["Hello", "Hi", "Bonjour", "Guten tag", "Hola", "Shalom", "Salve"];
-            let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-            return `${randomGreeting} ${fullName}`;
-        }
-
-        function shoutify(fullName) {
-            let exclamations = ["!", "!!", "!?!", "?!!", "@#$%!", "???", "!!!"];
-            let randomExclamation = exclamations[Math.floor(Math.random() * exclamations.length)];
-            return `Hey ${fullName} ${randomExclamation}`.toUpperCase();
-        }
-
-    </script>
+    </ol> -->
+    <script src="src/textLIB.js"></script>
+    <script src="src/index.js"></script>
 </body>
 
 </html>
