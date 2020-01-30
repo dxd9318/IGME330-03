@@ -20,7 +20,7 @@
     'use strict';
 
     let ctx = document.querySelector('canvas').getContext('2d');
-    let rotation = 0;
+    let rotation = 0, scale = 0.05;
     let rotationSpeed = .05;
     let transformAmount = 0;
     let strokeStyle = "black";
@@ -39,10 +39,10 @@
 
 
     function loop() {
-        //	requestAnimationFrame(loop);
+        requestAnimationFrame(loop);
         ctx.save();
-        //	ctx.translate(320, 240);
-        //	ctx.scale(.5, .5);
+        ctx.translate(320, 240);
+        ctx.scale(scale, scale);
         ctx.rotate(rotation);
         ctx.lineWidth = 1;
         ctx.linePath = "round";
@@ -55,8 +55,13 @@
         ctx.strokeStyle = strokeStyle;
         ctx.stroke();
         ctx.restore();
-        //	rotation += rotationSpeed;
-        //	transformAmount += .1;
+        rotation += rotationSpeed;
+        if(scale > 1.0) {
+            scale = 0.05;
+        } else{
+            scale += 0.01;
+        }
+        transformAmount += .1;
     }
 
     function fillBGWithRandomTint() {
