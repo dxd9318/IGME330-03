@@ -97,7 +97,7 @@
             setInterval(drawWalker, 1000 / 12, walker1, "circle");
             setInterval(drawWalker, 1000 / 12, walker2, "heart");
             setInterval(drawWalker, 1000 / 12, walker3, "rectangle");
-            //		setInterval(cls,5000);
+            setInterval(cls,5000);
         }
 
         function drawWalker(walker, shape = "circle") {
@@ -165,7 +165,8 @@
         }
 
         function cls() {
-            ctx.clearRect(0, 0, 640, 480);
+            ctx.fillStyle = "green";
+            ctx.fillRect(20, 20, 600, 440);
         }
 
         function flipWeightedCoin(weight = 0.5) {
