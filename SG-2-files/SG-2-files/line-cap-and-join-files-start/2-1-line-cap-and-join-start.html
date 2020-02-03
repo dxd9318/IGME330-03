@@ -36,6 +36,7 @@
 		var gLineCap = "butt";
 		var gLineJoin = "bevel";
 		var gLineDash = [];
+		var gStrokeStyle = "black";
 		
 		// #1 - wait for page to load
 		window.onload = init; 
@@ -68,7 +69,10 @@
 				drawLines();
 			};
 		
-			
+			document.querySelector("#strokeStyleChooser").onchange = function(e){
+				gStrokeStyle = e.target.value;
+				drawLines();
+			}	
 			
 			drawLines();
 		}
@@ -78,7 +82,31 @@
 			// clear screen
 			ctx.clearRect(0,0,300,300);
 			
-			// See SG-2 for rest of code
+			ctx.beginPath();
+			// subpath for left line
+			ctx.moveTo(50,50);
+			ctx.lineTo(50, 250);
+
+			// subpath for middle line
+			ctx.moveTo(100,250);
+			ctx.lineTo(100, 50);
+			ctx.lineTo(250, 50);
+
+			// subpath for right line
+			ctx.moveTo(150,250);
+			ctx.lineTo(200,100);
+			ctx.lineTo(250,250);
+
+			// don't close the path or we'll get a triangle!!
+			//ctx.closePath();
+
+			// we can't yet see the path, so stroke it.
+			ctx.strokeStyle=gStrokeStyle;
+			ctx.lineCap = gLineCap;
+			ctx.lineJoin = gLineJoin;
+			ctx.setLineDash(gLineDash);
+			ctx.lineWidth = 16;
+			ctx.stroke();
 		}
 		
 		
@@ -115,7 +143,16 @@
 				<option value="solid" selected>solid</option>
 				<option value="dashed">dashed</option>
     		</select>
-    	</label>
+		</label>
+		
+		<label>strokeStyle:
+			<select id="strokeStyleChooser">
+				<option value="black" selected>black</option>
+				<option value="red">red</option>
+				<option value="blue">blue</option>
+				<option value="green">green</option>
+			</select>
+		</label>
     	
     	</section>
 </body>
