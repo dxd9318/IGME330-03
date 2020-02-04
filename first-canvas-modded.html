@@ -130,11 +130,11 @@
             console.log(mouseX,mouseY);
 
             for(let i = 0; i < 10; i++){
-                let x = mouseX + getRandomInt(-100, 100);
-                let y = mouseY + getRandomInt(-100, 100);
-                let width = getRandomInt(20, 50);
-                let height = getRandomInt(20, 50);
-                let color = getRandomColor();
+                let x = mouseX + dxdLIB.getRandomInt(-100, 100);
+                let y = mouseY + dxdLIB.getRandomInt(-100, 100);
+                let width = dxdLIB.getRandomInt(20, 50);
+                let height = dxdLIB.getRandomInt(20, 50);
+                let color = dxdLIB.getRandomColor();
 
                 dxdLIB.drawRectangle(ctx, x, y, width, height, color);
             }
