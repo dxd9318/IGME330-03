@@ -12,6 +12,7 @@ function init() {
     canvas.height = canvasHeight;
     ctx = canvas.getContext("2d");
     // TODO: init lifeworld
+    lifeworld = new Lifeworld(60, 40, 0.2);
     loop();
 }
 
@@ -20,6 +21,7 @@ function loop() {
     // TODO: update lifeworld
     drawBackground();
     drawWorld();
+    lifeworld.step();
 }
 
 function drawBackground() {
@@ -31,9 +33,18 @@ function drawBackground() {
 }
 
 function drawWorld() {
-    // TODO: implement
+    ctx.save();
+    for(let col = 0; col < lifeworld.numCols; col++){
+        for(let row = 0; row < lifeworld.numRows; row++){
+            drawCell(col, row, cellWidth, lifeworld.world[col][row]);
+        }
+    }
+    ctx.restore();
 }
 
 function drawCell(col, row, dimensions, alive) {
-    // TODO: implement
+    ctx.beginPath();
+    ctx.rect(col*dimensions, row*dimensions, dimensions, dimensions);
+    ctx.fillStyle = alive ? 'red' : 'rgba(0,0,0,0)';
+    ctx.fill();
 }
