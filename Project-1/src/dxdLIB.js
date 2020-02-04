@@ -119,7 +119,7 @@
         },
 
 
-        // get random values
+        // math helpers
         getRandomColor() {
             const getByte = _ => 55 + Math.round(Math.random() * 200); // ES6 VERSION
 
@@ -128,7 +128,11 @@
 
         getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
+        },
+
+        dtr(degrees){
+            return degrees * (Math.PI/180);
+        },
     };
 
     if (window) {
