@@ -13,7 +13,8 @@
     // other flower drawing values
     let n = 0;
 	const c = 9; // `c` is the "padding" between the petals
-	const divergence = 129.9;
+    const divergence = 129.9;
+    let running = false;
 
 
     // Execution start point -----------------------------------------------------------------
@@ -33,7 +34,8 @@
     //COMPLETED // click on canvas to draw flower at click position
 
     // draw flower
-        // draw petals using shape user designated shape and coloring option (1, 2, 3, 4)
+        // draw petals using shape user designated shape 
+        //COMPLETED // and coloring option
         // transform-rotate each petal to point towards flower's center 
         // limit petal rows to number of rows designated by user input (3, 5, 7, 10)
         // draw smiley at center, opposite color as the flower center
@@ -70,7 +72,7 @@
         // reset n to 0 so flower starts growing from new center
         n = 0;
         // call phyllotaxis flower drawing method
-        phyllotaxisLoop();  // ITS GETTING FASTER AFTER EVERY CLICK NOT SURE WHY <<<<<<<<<<<<<<<<<<<<
+        phyllotaxisLoop();
 
         // // draw smiley at flower center  // it's getting covered by the petals here <<<<<<<<<<<<<<<<<<<<
         // drawSmiley(currentFlowerCenterX, currentFlowerCenterY, 15);
@@ -78,7 +80,12 @@
 
     // from phyllotaxis assignment
     function phyllotaxisLoop(){
-		setTimeout(phyllotaxisLoop,1000/30); //<<<<<<<<<<<<<<<<<<<< refer to first-canvas-modded for how we fixed this then
+        if(!running){
+            //setTimeout(phyllotaxisLoop, 1000/30); //setTimeout calls only once after the time delay
+            setInterval(phyllotaxisLoop, 1000/60);  //setInterval calls every designated amount of milliseconds
+            
+            running = true;
+        }
 		// each frame draw a new petal
 		// `a` is the angle (of petal from center??)
 		// `r` is the radius from the center of the flower
@@ -131,7 +138,7 @@
         dxdLIB.drawCircle(ctx, x + faceRadius/4, y - faceRadius/6, faceRadius/5, 0, Math.PI*2, false, "gray", 1.0);
 
         // smile    // semi-circle
-        dxdLIB.drawCircle(ctx, x, y + faceRadius/6, faceRadius/2, 0, Math.PI, false, "gray", 1.0);
+        dxdLIB.drawCircle(ctx, x, y + faceRadius/6, faceRadius/2, 0, Math.PI, false, "pink", 1.0);
 
 
         // had to scrap SG-1 smiley because making it as small as i wanted would've eliminated some details in it.
