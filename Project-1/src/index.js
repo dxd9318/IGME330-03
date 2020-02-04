@@ -90,26 +90,21 @@
 		//console.log(x,y);
 
         // color enhancements
-        /*let color;
+        let color;
         let aDegrees = n * divergence;
         if (coloringOption == "rgbN"){
-            // 1 - change RGB based on value of n
+            //1 - change RGB based on value of n
 		    color = `rgb(${n % 256},0,255)`;
         } else if(coloringOption == "rgbA"){
-            // 2 - change RGB based on angle of dot
+            //2 - change RGB based on angle of dot
             color = `rgb(${aDegrees % 256},0,255)`;
         } else if(coloringOption == "hslN"){
-            // 3 - change HSL based on what quadrant the petal is in
+            //3 - change HSL based on what quadrant the petal is in
             color = `hsl(${n/5 % 360},100%,50%)`;
         } else if(coloringOption == "hslQ"){
-            // 4 - change HSL based on the value of n
+            //4 - change HSL based on the value of n
             color = `hsl(${aDegrees % 360},100%,50%)`;
-        }*/
-		
-        // 2 - change RGB based on angle of dot
-		let aDegrees = n * divergence;
-        let color = `rgb(${aDegrees % 256},0,255)`;
-        
+        }
 
         //drawCircle(ctx, x, y, radius, startAngle, endAngle, ccw = false, 
             //fillStyle = "black", alphaValue = 0.2, lineWidth = 0, strokeStyle = "black")
