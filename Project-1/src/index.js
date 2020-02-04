@@ -6,8 +6,8 @@
     let canvas, ctx;
 
     // user-input variables
-    let petalShape = "circle";
-    let coloringOption = 1;
+    let petalRowLimit = 5;
+    let petalShape, coloringOption = "rgbN";
     let currentFlowerCenterX, currentFlowerCenterY;
 
     // other flower drawing values
@@ -32,8 +32,6 @@
     /* TODO:
     //COMPLETED // click on canvas to draw flower at click position
 
-    // add this flower's center coords and radius to an array, for onclick collision detection later
-
     // draw flower
         // draw petals using shape user designated shape and coloring option (1, 2, 3, 4)
         // transform-rotate each petal to point towards flower's center 
@@ -42,6 +40,20 @@
     */
 
     function setupUI(){
+        //document.querySelector("#")
+
+        document.querySelector("#petalShapeChooser").onchange = function(e){
+            petalShape = e.target.value;
+        }
+
+        document.querySelector("#petalColorChooser").onchange = function(e){
+            coloringOption = e.target.value;
+        }
+
+        document.querySelector("#gradientCB").onchange = function(e){
+            // /*petal coloring gradient*/ = e.target.checked;
+        };
+
         canvas.onclick = canvasClicked;
     }
 
@@ -58,8 +70,8 @@
         // call phyllotaxis flower drawing method
         phyllotaxisLoop();  // ITS GETTING FASTER AFTER EVERY CLICK NOT SURE WHY <<<<<<<<<<<<<<<<<<<<
 
-        // draw smiley at flower center
-        drawSmiley(currentFlowerCenterX, currentFlowerCenterY, 15);
+        // // draw smiley at flower center  // it's getting covered by the petals here
+        // drawSmiley(currentFlowerCenterX, currentFlowerCenterY, 15);
     }
 
     // from phyllotaxis assignment
@@ -77,30 +89,39 @@
 		let y = r * Math.sin(a) + currentFlowerCenterY;
 		//console.log(x,y);
 
-		// color enhancements
-		// 1 - change RGB based on value of n
-		//let color = `rgb(${n % 256},0,255)`;
+        // color enhancements
+        /*let color;
+        let aDegrees = n * divergence;
+        if (coloringOption == "rgbN"){
+            // 1 - change RGB based on value of n
+		    color = `rgb(${n % 256},0,255)`;
+        } else if(coloringOption == "rgbA"){
+            // 2 - change RGB based on angle of dot
+            color = `rgb(${aDegrees % 256},0,255)`;
+        } else if(coloringOption == "hslN"){
+            // 3 - change HSL based on what quadrant the petal is in
+            color = `hsl(${n/5 % 360},100%,50%)`;
+        } else if(coloringOption == "hslQ"){
+            // 4 - change HSL based on the value of n
+            color = `hsl(${aDegrees % 360},100%,50%)`;
+        }*/
 		
-		// 2 - change RGB based on angle of dot
+        // 2 - change RGB based on angle of dot
 		let aDegrees = n * divergence;
-		let color = `rgb(${aDegrees % 256},0,255)`;
-
-		// 3 - change HSL based on what quadrant the petal is in
-		//let aDegrees = n * divergence;
-		//let color = `hsl(${aDegrees % 360},100%,50%)`;
-
-		// 4 - change HSL based on the value of n
-		//let aDegrees = n * divergence;
-        //let color = `hsl(${n/5 % 360},100%,50%)`;
+        let color = `rgb(${aDegrees % 256},0,255)`;
         
+
         //drawCircle(ctx, x, y, radius, startAngle, endAngle, ccw = false, 
             //fillStyle = "black", alphaValue = 0.2, lineWidth = 0, strokeStyle = "black")
-        dxdLIB.drawCircle(ctx, x, y, 2, 0, Math.PI*2, false, color);
+        dxdLIB.drawCircle(ctx, x, y, 10, 0, Math.PI*2, false, color, 1);
         
         //drawCircle(ctx,x,y,2,color);
 		//drawHeart(ctx,x,y,5,color);
 
-		n++;
+        n++;
+        
+        // draw smiley at flower center
+        drawSmiley(currentFlowerCenterX, currentFlowerCenterY, 15);
     }
 
     
