@@ -30,7 +30,7 @@
     }
 
     /* TODO:
-    // click on canvas to draw flower at click position
+    //COMPLETED // click on canvas to draw flower at click position
 
     // add this flower's center coords and radius to an array, for onclick collision detection later
 
@@ -53,34 +53,29 @@
         currentFlowerCenterY = e.clientY - rect.y;
         //console.log(currentFlowerCenterX, currentFlowerCenterY);
 
+        // reset n to 0 so flower starts growing from new center
+        n = 0;
         // call phyllotaxis flower drawing method
-        n = 0;  // reset n to 0 so flower starts growing from new center
-        phyllotaxisLoop();
+        phyllotaxisLoop();  // ITS GETTING FASTER AFTER EVERY CLICK NOT SURE WHY <<<<<<<<<<<<<<<<<<<<
 
         // draw smiley at flower center
         drawSmiley(currentFlowerCenterX, currentFlowerCenterY, 15);
     }
 
     // from phyllotaxis assignment
-    // WILL NEED TO HEAVILY REPURPOSE THE FOLLOWING
     function phyllotaxisLoop(){
 		setTimeout(phyllotaxisLoop,1000/30);
-		// each frame draw a new dot
-		// `a` is the angle
+		// each frame draw a new petal
+		// `a` is the angle (of petal from center??)
 		// `r` is the radius from the center of the flower
-		// `c` is the "padding" between the dots
+		// `c` is the "padding" between the petals
 		let a = n * dxdLIB.dtr(divergence);
 		let r = c * Math.sqrt(n);
-		//console.log(a,r);
 
-		// now calculate the `x` and `y`
-		// let x = r * Math.cos(a) + canvasWidth/2;
-        // let y = r * Math.sin(a) + canvasHeight/2;
+		// now calculate the `x` and `y` position of current petal
         let x = r * Math.cos(a) + currentFlowerCenterX;
 		let y = r * Math.sin(a) + currentFlowerCenterY;
-		console.log(x,y);
-
-		//drawCircle(ctx,x,y,2,"white");
+		//console.log(x,y);
 
 		// color enhancements
 		// 1 - change RGB based on value of n

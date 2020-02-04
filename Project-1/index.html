@@ -2,13 +2,55 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Prototype - Project 1</title>
+        <title>Clickable Phyllotaxis! (Prototype - Project 1)</title>
         <link rel="stylesheet" type="text/css" href="styles/my-styles.css">
         <script src="src/dxdLIB.js"></script>
         <script src="src/index.js"></script>
     </head>
     <body>
+        <h1>Clickable Phyllotaxis! (Prototype - Project 1)</h1>
         <canvas>Get a real browser!</canvas>
-        
+        <section id="description">
+            <p>
+                Click anywhere on the canvas to start growing your garden!</br>
+                Use the controls below to design each flower how you want.
+            </p>
+        </section>
+        <section id="controls">
+            <span>
+                <!--radio buttons for number of petal rows-->
+                <input type="radio" name="petalRows" value="3">Barely Past Budding
+                <input type="radio" name="petalRows" value="5">Just Bloomed
+                <input type="radio" name="petalRows" value="7">Fully Blossomed
+                <input type="radio" name="petalRows" value="10">Quite Flourishing!
+            </span>
+        </br></br>
+            <span>
+                <!--dropdown for petal shape-->
+                <label>Petal Shape
+                    <select id="petalShapeChooser">
+                        <option value="circle" selected>Circle</option>
+                        <option value="triangle">Triangle</option>
+                        <option value="heart">Heart</option>
+                    </select>
+                </label>
+                
+                <!--dropdown petal coloring option-->
+                <label>Petal Coloring Option
+                    <select id="petalColorChooser">
+                        <option value="rgbN" selected>RGB Based on N</option>
+                        <option value="rgbA">RGB Based on A</option>
+                        <option value="hslN">HSL Based on N</option>
+                        <option value="hslQ">HSL Based on Quadrant</option>
+                    </select>
+                </label>
+            </span>
+        </br></br>
+            <span>
+                <!--checkboxes for petal gradient transparency, coming soon-->
+                <input type="checkbox" id="gradientCB" checked>
+                <label for="gradientCB">Transparency Gradient for Petals</label>
+            </span>
+        </section>
     </body>
 </html>
