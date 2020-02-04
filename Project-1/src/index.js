@@ -84,7 +84,7 @@
             //setTimeout(phyllotaxisLoop, 1000/30); //setTimeout calls only once after the time delay
             setInterval(phyllotaxisLoop, 1000/60);  //setInterval calls every designated amount of milliseconds
             
-            running = true;
+            running = true; //WHEN DOES IT GET SET TO FALSE AGAIN? IS THIS NEEDED? CAN I RE-PURPOSE FOR PETAL ROW LIMIT? <<<<<<<<<<<<<<<<<<<<<<<<<
         }
 		// each frame draw a new petal
 		// `a` is the angle (of petal from center??)
