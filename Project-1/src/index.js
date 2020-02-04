@@ -51,27 +51,19 @@
         let rect = e.target.getBoundingClientRect();
         currentFlowerCenterX = e.clientX - rect.x;
         currentFlowerCenterY = e.clientY - rect.y;
-        console.log(currentFlowerCenterX, currentFlowerCenterY);
+        //console.log(currentFlowerCenterX, currentFlowerCenterY);
 
         // call phyllotaxis flower drawing method
+        n = 0;  // reset n to 0 so flower starts growing from new center
         phyllotaxisLoop();
 
-        /*
-            for(let i = 0; i < 10; i++){
-                let x = mouseX + dxdLIB.getRandomInt(-100, 100);
-                let y = mouseY + dxdLIB.getRandomInt(-100, 100);
-                let width = dxdLIB.getRandomInt(20, 50);
-                let height = dxdLIB.getRandomInt(20, 50);
-                let color = dxdLIB.getRandomColor();
-
-                dxdLIB.drawRectangle(ctx, x, y, width, height, color);
-            }
-        */
+        // draw smiley at flower center
+        drawSmiley(currentFlowerCenterX, currentFlowerCenterY, 15);
     }
 
     // from phyllotaxis assignment
     // WILL NEED TO HEAVILY REPURPOSE THE FOLLOWING
-    function phyllotaxisLoop(flowerCenterX, flowerCenterY){
+    function phyllotaxisLoop(){
 		setTimeout(phyllotaxisLoop,1000/30);
 		// each frame draw a new dot
 		// `a` is the angle
@@ -84,9 +76,9 @@
 		// now calculate the `x` and `y`
 		// let x = r * Math.cos(a) + canvasWidth/2;
         // let y = r * Math.sin(a) + canvasHeight/2;
-        let x = r * Math.cos(a) + flowerCenterX;
-		let y = r * Math.sin(a) + flowerCenterY;
-		//console.log(x,y);
+        let x = r * Math.cos(a) + currentFlowerCenterX;
+		let y = r * Math.sin(a) + currentFlowerCenterY;
+		console.log(x,y);
 
 		//drawCircle(ctx,x,y,2,"white");
 
@@ -115,41 +107,26 @@
 
 		n++;
     }
+
     
-    //face drawing code from SG-1 assignment
-    // // face
-    // // set state variables
-    // ctx.fillStyle = "yellow";
-    // ctx.strokeStyle = "lightyellow";
-    // ctx.lineWidth = 5;
+    // my face drawing code from first-canvas-modded assignment
+    function drawSmiley(x, y, faceRadius){
+        // face base
+        dxdLIB.drawCircle(ctx, x, y, faceRadius, 0, Math.PI*2, false, "yellow", 1.0);
 
-    // // face base
-    // ctx.beginPath();
-    // ctx.arc(375, 250, 200, 0, Math.PI*2, false); 
-    // ctx.closePath();
-    // ctx.fill();
-    // ctx.stroke();
+        // left eye
+        dxdLIB.drawCircle(ctx, x - faceRadius/4, y - faceRadius/6, faceRadius/5, 0, Math.PI*2, false, "white", 1.0);
+
+        // right eye
+        dxdLIB.drawCircle(ctx, x + faceRadius/4, y - faceRadius/6, faceRadius/5, 0, Math.PI*2, false, "white", 1.0);
+
+        // smile    // semi-circle
+        dxdLIB.drawCircle(ctx, x, y + faceRadius/6, faceRadius/2, 0, Math.PI, false, "white", 1.0);
+
+
+        // had to scrap SG-1 smiley because making it as small as i wanted would've eliminated some details in it.
+        // Will re-look at it using transform-scale later.
+    }
     
-    // // mouth
-    // drawCircle(ctx, 375, 260, 100, "black");
-    // drawCircle(ctx, 375, 245, 105, "yellow");
-
-    // // eyelashes
-    // drawCircle(ctx, 275, 225, 10, "black");
-    // drawCircle(ctx, 475, 225, 10, "black");
-
-    // drawCircle(ctx, 275, 215, 10, "yellow");
-    // drawCircle(ctx, 475, 215, 10, "yellow");
-
-    // // eyes
-    // drawCircle(ctx, 305, 240, 30, "black");
-    // drawCircle(ctx, 445, 240, 30, "black");
-
-    // drawCircle(ctx, 305, 255, 35, "yellow");
-    // drawCircle(ctx, 445, 255, 35, "yellow");
-
-    // // cheeks
-    // drawCircle(ctx, 255, 260, 30, "pink");
-    // drawCircle(ctx, 495, 260, 30, "pink");
 
 })();   //IIFE END
