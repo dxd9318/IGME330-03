@@ -7,7 +7,7 @@
 
     // user-input variables
     let petalRowLimit = 5;
-    let petalShape, coloringOption = "rgbN";
+    let petalShape, currentColorOption = "rgbN", nextColorOption = "rgbN";
     let currentFlowerCenterX, currentFlowerCenterY;
 
     // other flower drawing values
@@ -47,7 +47,7 @@
         }
 
         document.querySelector("#petalColorChooser").onchange = function(e){
-            coloringOption = e.target.value;
+            nextColorOption = e.target.value;
         }
 
         document.querySelector("#gradientCB").onchange = function(e){
@@ -65,18 +65,20 @@
         currentFlowerCenterY = e.clientY - rect.y;
         //console.log(currentFlowerCenterX, currentFlowerCenterY);
 
+        // new color option will only take effect after next canvas click
+        currentColorOption = nextColorOption;
         // reset n to 0 so flower starts growing from new center
         n = 0;
         // call phyllotaxis flower drawing method
         phyllotaxisLoop();  // ITS GETTING FASTER AFTER EVERY CLICK NOT SURE WHY <<<<<<<<<<<<<<<<<<<<
 
-        // // draw smiley at flower center  // it's getting covered by the petals here
+        // // draw smiley at flower center  // it's getting covered by the petals here <<<<<<<<<<<<<<<<<<<<
         // drawSmiley(currentFlowerCenterX, currentFlowerCenterY, 15);
     }
 
     // from phyllotaxis assignment
     function phyllotaxisLoop(){
-		setTimeout(phyllotaxisLoop,1000/30);
+		setTimeout(phyllotaxisLoop,1000/30); //<<<<<<<<<<<<<<<<<<<< refer to first-canvas-modded for how we fixed this then
 		// each frame draw a new petal
 		// `a` is the angle (of petal from center??)
 		// `r` is the radius from the center of the flower
@@ -92,16 +94,16 @@
         // color enhancements
         let color;
         let aDegrees = n * divergence;
-        if (coloringOption == "rgbN"){
+        if (currentColorOption == "rgbN"){
             //1 - change RGB based on value of n
 		    color = `rgb(${n % 256},0,255)`;
-        } else if(coloringOption == "rgbA"){
+        } else if(currentColorOption == "rgbA"){
             //2 - change RGB based on angle of dot
             color = `rgb(${aDegrees % 256},0,255)`;
-        } else if(coloringOption == "hslN"){
+        } else if(currentColorOption == "hslN"){
             //3 - change HSL based on what quadrant the petal is in
             color = `hsl(${n/5 % 360},100%,50%)`;
-        } else if(coloringOption == "hslQ"){
+        } else if(currentColorOption == "hslQ"){
             //4 - change HSL based on the value of n
             color = `hsl(${aDegrees % 360},100%,50%)`;
         }
@@ -109,9 +111,6 @@
         //drawCircle(ctx, x, y, radius, startAngle, endAngle, ccw = false, 
             //fillStyle = "black", alphaValue = 0.2, lineWidth = 0, strokeStyle = "black")
         dxdLIB.drawCircle(ctx, x, y, 10, 0, Math.PI*2, false, color, 1);
-        
-        //drawCircle(ctx,x,y,2,color);
-		//drawHeart(ctx,x,y,5,color);
 
         n++;
         
@@ -126,13 +125,13 @@
         dxdLIB.drawCircle(ctx, x, y, faceRadius, 0, Math.PI*2, false, "yellow", 1.0);
 
         // left eye
-        dxdLIB.drawCircle(ctx, x - faceRadius/4, y - faceRadius/6, faceRadius/5, 0, Math.PI*2, false, "white", 1.0);
+        dxdLIB.drawCircle(ctx, x - faceRadius/4, y - faceRadius/6, faceRadius/5, 0, Math.PI*2, false, "gray", 1.0);
 
         // right eye
-        dxdLIB.drawCircle(ctx, x + faceRadius/4, y - faceRadius/6, faceRadius/5, 0, Math.PI*2, false, "white", 1.0);
+        dxdLIB.drawCircle(ctx, x + faceRadius/4, y - faceRadius/6, faceRadius/5, 0, Math.PI*2, false, "gray", 1.0);
 
         // smile    // semi-circle
-        dxdLIB.drawCircle(ctx, x, y + faceRadius/6, faceRadius/2, 0, Math.PI, false, "white", 1.0);
+        dxdLIB.drawCircle(ctx, x, y + faceRadius/6, faceRadius/2, 0, Math.PI, false, "gray", 1.0);
 
 
         // had to scrap SG-1 smiley because making it as small as i wanted would've eliminated some details in it.
