@@ -5,16 +5,16 @@
     const canvasWidth = 800, canvasHeight = 600;
     let canvas, ctx;
 
-    // user-input variables
-    let petalShape = "circle", currentColorOption = "rgbN", nextColorOption = "rgbN";
-    let currentFlowerCenterX, currentFlowerCenterY;
-
     // other flower drawing values
     let n = 0;
-    let maxN = 50; // BPB = ~20, JB = ~50 , FB = ~85, QF = ~130
 	const c = 9; // `c` is the "padding" between the petals
     const divergence = 129.9;
     let running = false;
+
+    // user-input variables
+    let maxN = 50; // BPB = ~20, JB = ~50 , FB = ~85, QF = ~130
+    let currentPetalShape = "circle", nextPetalShape = "circle", currentColorOption = "rgbN", nextColorOption = "rgbN";
+    let currentFlowerCenterX, currentFlowerCenterY;
 
 
     // Execution start point -----------------------------------------------------------------
@@ -42,8 +42,7 @@
     */
 
     function setupUI(){
-        // From sprites-and-radio-button demo 
-        //document.querySelectorAll("input[type=radio][name=speed]")
+        // From sprites-and-radio-button demo
         let radioButtons = document.querySelectorAll("input[type=radio][name=petalRows]");
         for (let r of radioButtons){
             r.onchange = function (e){
@@ -75,8 +74,10 @@
         currentFlowerCenterY = e.clientY - rect.y;
         //console.log(currentFlowerCenterX, currentFlowerCenterY);
 
-        // new color option will only take effect after next canvas click
+        // User control changes will only occur after the next canvas click
         currentColorOption = nextColorOption;
+        currentPetalShape = nextPetalShape;
+
         // reset n to 0 so flower starts growing from new center
         n = 0;
         // call phyllotaxis flower drawing method
@@ -89,7 +90,7 @@
     // from phyllotaxis assignment
     function phyllotaxisLoop(){
 
-        // WRAP IN THE FOLLOWING WHILE LOOP: // now in the phyllo draw loop, keep drawing while n <= maxN       <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        // WRAP IN THE FOLLOWING WHILE LOOP: // now in the phyllo draw loop, keep drawing while n <= maxN // MIGHT NEED TO SET running TO FALSE. IF NOT, SEE IF CAN OMIT running ALTOGETHER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
         if(!running){
             //setTimeout(phyllotaxisLoop, 1000/30); //setTimeout calls only once after the time delay
