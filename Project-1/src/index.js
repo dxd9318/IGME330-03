@@ -6,12 +6,12 @@
     let canvas, ctx;
 
     // user-input variables
-    let petalRowLimit = 5;
-    let petalShape, currentColorOption = "rgbN", nextColorOption = "rgbN";
+    let petalShape = "circle", currentColorOption = "rgbN", nextColorOption = "rgbN";
     let currentFlowerCenterX, currentFlowerCenterY;
 
     // other flower drawing values
     let n = 0;
+    let maxN = 50; // BPB = ~20, JB = ~50 , FB = ~85, QF = ~130
 	const c = 9; // `c` is the "padding" between the petals
     const divergence = 129.9;
     let running = false;
@@ -43,6 +43,13 @@
 
     function setupUI(){
         //document.querySelector("#")
+        // need to include event handler for radio buttons for changing number of petals.
+        // based on which radButton clicked, set maxN equal to that value.
+        // now in the phyllo draw loop, keep drawing while n <= maxN
+
+        // document.querySelector("#petalRowLimit").onchange = function (e){
+        //     maxN = e.target.value;
+        // }    // MAKE SURE TO CAST VALUE TO AN INT FIRST, IT'LL BE A STRING BY DEFAULT
 
         document.querySelector("#petalShapeChooser").onchange = function(e){
             petalShape = e.target.value;
