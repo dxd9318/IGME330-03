@@ -42,14 +42,15 @@
     */
 
     function setupUI(){
-        //document.querySelector("#")
-        // need to include event handler for radio buttons for changing number of petals.
-        // based on which radButton clicked, set maxN equal to that value.
-        // now in the phyllo draw loop, keep drawing while n <= maxN
-
-        // document.querySelector("#petalRowLimit").onchange = function (e){
-        //     maxN = e.target.value;
-        // }    // MAKE SURE TO CAST VALUE TO AN INT FIRST, IT'LL BE A STRING BY DEFAULT
+        // From sprites-and-radio-button demo 
+        //document.querySelectorAll("input[type=radio][name=speed]")
+        let radioButtons = document.querySelectorAll("input[type=radio][name=petalRows]");
+        for (let r of radioButtons){
+            r.onchange = function (e){
+                // Need to cast value from string to int value, or else get NaN.
+                maxN = Number(e.target.value);
+            }
+        }  
 
         document.querySelector("#petalShapeChooser").onchange = function(e){
             petalShape = e.target.value;
@@ -87,6 +88,9 @@
 
     // from phyllotaxis assignment
     function phyllotaxisLoop(){
+
+        // WRAP IN THE FOLLOWING WHILE LOOP: // now in the phyllo draw loop, keep drawing while n <= maxN       <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
         if(!running){
             //setTimeout(phyllotaxisLoop, 1000/30); //setTimeout calls only once after the time delay
             setInterval(phyllotaxisLoop, 1000/60);  //setInterval calls every designated amount of milliseconds
