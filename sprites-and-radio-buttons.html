@@ -61,7 +61,37 @@
                 ctx.fill();
                 ctx.restore();
             }
+        }
 
+        class LateralMoveSprite extends Sprite{
+            constructor(x = 0, y = 0, span = 10, fwd = { x: 1, y: 0 }, speed = 0, color = "black", lineWidth) {
+                super(x, y, span, fwd, speed, color);
+                this.lineWidth = Math.random() * 3 + 1;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.beginPath();
+                ctx.rect(-this.span / 2, -this.span / 2, this.span, this.span);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(0,0, this.span/4, 0, Math.PI*2, false);
+                ctx.closePath();
+                ctx.fillStyle = "black";
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = this.lineWidth;
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+            }
+            
+            move() {
+                this.x += this.fwd.x * this.speed;
+            }
         }
     </script>
 
@@ -128,6 +158,8 @@
             // But cool kids use the spread operator instead of array.concat() 
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
             // sprites =  [...createSprites(10,Sprite), ...createSprites(20,RingSprite)];
+
+            sprites =  [...createSprites(10,Sprite), ...createSprites(20,RingSprite), ...createSprites(10, LateralMoveSprite)];
 
             // hook up event handlers
             setupUI();
