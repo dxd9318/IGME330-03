@@ -1,23 +1,24 @@
 (function (){   //IIFE START
     "use strict";
 
-    // canvas setup variables
+    // Canvas setup variables
     const canvasWidth = 800, canvasHeight = 600;
     let canvas, ctx;
 
-    // other flower drawing values
+    // Flower drawing values and handling variables
     let n = 0;
-	const c = 9; // `c` is the "padding" between the petals
+	const c = 9; // "padding" between petals
     const divergence = 129.9;
-    let running = false;
+    let interval = null;
+    let alreadyRunning = false;
 
-    // user-input variables
-    let maxN = 50; // BPB = ~20, JB = ~50 , FB = ~85, QF = ~130
+    // User-input variables
+    let currentMaxN = 50, nextMaxN = 50; // BPB = ~20, JB = ~50 , FB = ~85, QF = ~130
     let currentPetalShape = "circle", nextPetalShape = "circle", currentColorOption = "rgbN", nextColorOption = "rgbN";
     let currentFlowerCenterX, currentFlowerCenterY;
 
 
-    // Execution start point -----------------------------------------------------------------
+    // Begin execution -----------------------------------------------------------------
     window.onload = init;
 
     function init(){
@@ -37,8 +38,8 @@
         // draw petals using shape user designated shape 
         //COMPLETED // and coloring option
         // transform-rotate each petal to point towards flower's center 
-        // limit petal rows to number of rows designated by user input (3, 5, 7, 10)
-        // draw smiley at center, opposite color as the flower center
+        //COMPLETED // limit petal rows to number of rows designated by user input
+        //COMPLETED // draw smiley at center
     */
 
     function setupUI(){
@@ -47,59 +48,56 @@
         for (let r of radioButtons){
             r.onchange = function (e){
                 // Need to cast value from string to int value, or else get NaN.
-                maxN = Number(e.target.value);
+                nextMaxN = Number(e.target.value);
             }
         }  
 
         document.querySelector("#petalShapeChooser").onchange = function(e){
-            petalShape = e.target.value;
+            nextPetalShape = e.target.value;
         }
 
         document.querySelector("#petalColorChooser").onchange = function(e){
             nextColorOption = e.target.value;
         }
 
-        document.querySelector("#gradientCB").onchange = function(e){
-            // /*petal coloring gradient*/ = e.target.checked;
-        };
-
         canvas.onclick = canvasClicked;
     }
 
-    // from modified first-canvas assignment
+    // From modified first-canvas assignment
     function canvasClicked(e){
-        // set location of click to a new flower's center
+        // Set location of click to a new flower's center
         let rect = e.target.getBoundingClientRect();
         currentFlowerCenterX = e.clientX - rect.x;
         currentFlowerCenterY = e.clientY - rect.y;
-        //console.log(currentFlowerCenterX, currentFlowerCenterY);
 
         // User control changes will only occur after the next canvas click
+        currentMaxN = nextMaxN;
         currentColorOption = nextColorOption;
         currentPetalShape = nextPetalShape;
 
-        // reset n to 0 so flower starts growing from new center
-        n = 0;
-        // call phyllotaxis flower drawing method
-        phyllotaxisLoop();
+        n = 0; // reset n to 0 so flower starts growing from new center
+        phyllotaxisLoop(); // call phyllotaxis flower drawing method
 
-        // // draw smiley at flower center  // it's getting covered by the petals here <<<<<<<<<<<<<<<<<<<<
-        // drawSmiley(currentFlowerCenterX, currentFlowerCenterY, 15);
+        // Draw Smiley at center after a quarter of a second, to prevent inner petals overlapping it
+        setTimeout(drawSmiley, 250, currentFlowerCenterX, currentFlowerCenterY, 15);
     }
 
-    // from phyllotaxis assignment
-    function phyllotaxisLoop(){
-
-        // WRAP IN THE FOLLOWING WHILE LOOP: // now in the phyllo draw loop, keep drawing while n <= maxN // MIGHT NEED TO SET running TO FALSE. IF NOT, SEE IF CAN OMIT running ALTOGETHER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-        if(!running){
-            //setTimeout(phyllotaxisLoop, 1000/30); //setTimeout calls only once after the time delay
-            setInterval(phyllotaxisLoop, 1000/60);  //setInterval calls every designated amount of milliseconds
-            
-            running = true; //WHEN DOES IT GET SET TO FALSE AGAIN? IS THIS NEEDED? CAN I RE-PURPOSE FOR PETAL ROW LIMIT? <<<<<<<<<<<<<<<<<<<<<<<<<
+    // From phyllotaxis assignment
+    function phyllotaxisLoop(){ 
+        if(!alreadyRunning){
+            interval = setInterval(phyllotaxisLoop, 1000/30);  //setInterval calls every designated amount of milliseconds
+            alreadyRunning= true; // prevents setInterval from getting called on top of another already running setInterval
         }
+
+        // Flower stops drawing petals when reaching max petals
+        if (n == currentMaxN) {
+            clearInterval(interval);
+            alreadyRunning = false;
+            return;
+        }
+
 		// each frame draw a new petal
-		// `a` is the angle (of petal from center??)
+		// `a` is the angle of the petal from center
 		// `r` is the radius from the center of the flower
 		// `c` is the "padding" between the petals
 		let a = n * dxdLIB.dtr(divergence);
@@ -108,7 +106,6 @@
 		// now calculate the `x` and `y` position of current petal
         let x = r * Math.cos(a) + currentFlowerCenterX;
 		let y = r * Math.sin(a) + currentFlowerCenterY;
-		//console.log(x,y);
 
         // color enhancements
         let color;
@@ -127,16 +124,21 @@
             color = `hsl(${aDegrees % 360},100%,50%)`;
         }
 
-        //drawCircle(ctx, x, y, radius, startAngle, endAngle, ccw = false, 
-            //fillStyle = "black", alphaValue = 0.2, lineWidth = 0, strokeStyle = "black")
-        dxdLIB.drawCircle(ctx, x, y, 10, 0, Math.PI*2, false, color, 1);
+        // Finally, draw the petal        
+        if(currentPetalShape == "heart"){
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(a + 90); // have hearts point in towards flower center
+            dxdLIB.drawHeart(ctx, 0, 0, 10, color);
+
+            ctx.restore();
+        }
+        else{
+            dxdLIB.drawCircle(ctx, x, y, 10, 0, Math.PI*2, false, color, 1);
+        }
 
         n++;
-        
-        // draw smiley at flower center
-        drawSmiley(currentFlowerCenterX, currentFlowerCenterY, 15);
     }
-
     
     // my face drawing code from first-canvas-modded assignment
     function drawSmiley(x, y, faceRadius){
@@ -151,11 +153,6 @@
 
         // smile    // semi-circle
         dxdLIB.drawCircle(ctx, x, y + faceRadius/6, faceRadius/2, 0, Math.PI, false, "pink", 1.0);
-
-
-        // had to scrap SG-1 smiley because making it as small as i wanted would've eliminated some details in it.
-        // Will re-look at it using transform-scale later.
     }
     
-
 })();   //IIFE END

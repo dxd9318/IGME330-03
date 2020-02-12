@@ -8,50 +8,56 @@
         <script src="src/index.js"></script>
     </head>
     <body>
-        <h1>Clickable Phyllotaxis! (Prototype - Project 1)</h1>
-        <canvas>Get a real browser!</canvas>
-        <section id="description">
-            <p>
-                Click anywhere on the canvas to start growing your garden!</br>
-                Use the controls below to design each flower how you want.
-                (__CONTROLS NOT CURRENTLY FUNCTIONAL__)
-            </p>
-        </section>
-        <section id="controls">
-            <span>
-                <!--radio buttons for number of petal rows-->
-                <input type="radio" name="petalRows" value="20">Barely Past Budding
-                <input type="radio" name="petalRows" value="50" checked>Just Bloomed
-                <input type="radio" name="petalRows" value="85">Fully Blossomed
-                <input type="radio" name="petalRows" value="130">Quite Flourishing!
-            </span>
-        </br></br>
-            <span>
-                <!--dropdown for petal shape-->
-                <label>Petal Shape
-                    <select id="petalShapeChooser">
-                        <option value="circle" selected>Circle</option>
-                        <option value="wedge">Wedge</option>
-                        <option value="heart">Heart</option>
-                    </select>
-                </label>
-
-                <!--dropdown petal coloring option-->
-                <label>Petal Coloring Option
-                    <select id="petalColorChooser">
-                        <option value="rgbN" selected>RGB Based on N</option>
-                        <option value="rgbA">RGB Based on A</option>
-                        <option value="hslN">HSL Based on N</option>
-                        <option value="hslQ">HSL Based on Quadrant</option>
-                    </select>
-                </label>
-            </span>
-        </br></br>
-            <span>
-                <!--checkboxes for petal gradient transparency, coming soon-->
-                <input type="checkbox" id="gradientCB" checked="unchecked">
-                <label for="gradientCB">Transparency Gradient for Petals</label>
-            </span>
-        </section>
+        <main>
+            <h1>Clickable Phyllotaxis! (Prototype - Project 1)</h1>
+            <canvas>Get a real browser!</canvas>
+        </main>
+        <div class="user-interface">
+            <section id="description">
+                <h4>Description:</h4>
+                <p>
+                    Click anywhere on the canvas to start growing your garden!<br>
+                    Use the controls below to design each flower how you want.<br>
+                    NOTE: changes won't go into effect until you start your next flower.
+                </p>
+            </section>
+            <section id="controls">
+                <h4>Controls:</h4>
+                <span title="Choose the fullness of your next flower">
+                    <!--radio buttons for number of petal rows-->
+                    <input type="radio" name="petalRows" value="20">Barely Past Budding
+                    <input type="radio" name="petalRows" value="50" checked>Just Bloomed
+                    <br>
+                    <input type="radio" name="petalRows" value="85">Fully Blossomed
+                    <input type="radio" name="petalRows" value="130">Quite Flourishing!
+                </span>
+            <br><br>
+                <span>
+                    <!--dropdown for petal shape-->
+                    <label>Petal Shape
+                        <select id="petalShapeChooser" title="Choose the petal shape for your next flower">
+                            <option value="circle" selected>Circle</option>
+                            <option value="wedge">Wedge</option>
+                            <option value="heart">Heart</option>
+                        </select>
+                    </label>
+                    
+                    <br>
+                    <!--dropdown petal coloring option-->
+                    <label>Petal Coloring Option
+                        <select id="petalColorChooser" title="Choose the color scheme for your next flower">
+                            <option value="rgbN" selected>RGB Based on N</option>
+                            <option value="rgbA">RGB Based on A</option>
+                            <option value="hslN">HSL Based on N</option>
+                            <option value="hslQ">HSL Based on Quadrant</option>
+                        </select>
+                    </label>
+                </span>
+            </section>
+        </div>
+        
+        <footer class="footer">
+            <p>IGME 330-03 - Diana Diaz</p>
+        </footer>
     </body>
 </html>

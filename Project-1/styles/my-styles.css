@@ -1,9 +1,27 @@
 /* Body: Set background to linear, top to bottom gradient - https://css-tricks.com/css3-gradients/ */
 
-
+body{
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+main{
+    float:left;
+}
 canvas{
-    /* center on screen? */
     border:1px solid gray;
 }
 
-/* where to put controls? need layout inspiration */
+.user-interface {
+    /* display: block; */
+    overflow: auto;
+    padding: 60px 20px;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+ }
