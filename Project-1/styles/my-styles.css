@@ -1,5 +1,9 @@
 /* Body: Set background to linear, top to bottom gradient - https://css-tricks.com/css3-gradients/ */
 
+#lemonada{
+    font-family: 'Lemonada', cursive;
+}
+
 body{
     margin: auto;
     width: 60%;
@@ -7,6 +11,9 @@ body{
 }
 main{
     float:left;
+}
+h1{
+    font-family: 'Lemonada';
 }
 canvas{
     border:1px solid gray;
@@ -16,6 +23,12 @@ canvas{
     /* display: block; */
     overflow: auto;
     padding: 60px 20px;
+}
+
+.font-loader{
+    height: 0;
+    width: 0;
+    overflow: hidden;
 }
 
 .footer {

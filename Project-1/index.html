@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Clickable Phyllotaxis! (Prototype - Project 1)</title>
+        <link href="https://fonts.googleapis.com/css?family=Lemonada&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles/my-styles.css">
         <script src="src/dxdLIB.js"></script>
         <script src="src/index.js"></script>
@@ -16,6 +17,7 @@
             <section id="description">
                 <h4>Description:</h4>
                 <p>
+                    Phyllotaxis refers to exploring the pattern in which petals grow in a flower.<br><br>
                     Click anywhere on the canvas to start growing your garden!<br>
                     Use the controls below to design each flower how you want.<br>
                     NOTE: changes won't go into effect until you start your next flower.
@@ -37,7 +39,7 @@
                     <label>Petal Shape
                         <select id="petalShapeChooser" title="Choose the petal shape for your next flower">
                             <option value="circle" selected>Circle</option>
-                            <option value="wedge">Wedge</option>
+                            <option value="triangle">Triangle</option>
                             <option value="heart">Heart</option>
                         </select>
                     </label>
@@ -54,6 +56,10 @@
                     </label>
                 </span>
             </section>
+        </div>
+
+        <div class="font-loader">
+            <p id="lemonada">Lemonada Font</p>
         </div>
         
         <footer class="footer">

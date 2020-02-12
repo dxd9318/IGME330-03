@@ -129,11 +129,17 @@
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(a + 90); // have hearts point in towards flower center
-            dxdLIB.drawHeart(ctx, 0, 0, 10, color);
+            dxdLIB.drawHeart(ctx, 0, 0, 7, color);
 
             ctx.restore();
-        }
-        else{
+        } else if (currentPetalShape == "triangle"){
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(a); // have triangles point in towards flower center
+            dxdLIB.drawTriangle(ctx, 0, 0, 20, 20, color, 0);
+
+            ctx.restore();
+        } else{
             dxdLIB.drawCircle(ctx, x, y, 10, 0, Math.PI*2, false, color, 1);
         }
 
