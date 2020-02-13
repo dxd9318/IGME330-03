@@ -2,25 +2,10 @@
 
 <head>
     <title>Greeter App ES6 Modular</title>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-
-        button,
-        input {
-            font-size: 1.2em;
-        }
-
-        li {
-            margin-bottom: 1em;
-        }
-
-        code {
-            font-size: 1.3em;
-            color: green;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+    <!-- <script src="src/utils.js"></script>
+    <script src="src/main.js"></script> -->
+    <script src="src/loader.js" type="module"></script>
 </head>
 
 <body>
@@ -141,52 +126,6 @@
     <p><b><i>Going forward, this is how we are writing code in this class for the rest of the semester. This is how
                 Project 2 and Project 3 must be structured!</i></b></li>
         <hr>
-
-        <script>
-            "use strict";
-
-            window.onload = init;
-
-            const appData = {
-                appHeadingText: "Greeter App",
-                appInstructionsHeading: "Instructions for this exercise",
-                appInstructionsText: "We are going to refactor the code in this example so that all the JS is placed in multiple ES6 modules, and has been moved to external files:"
-            };
-
-            function init() {
-                document.querySelector("h1").innerHTML = appData.appHeadingText;
-                document.querySelector("#instructionsHeading").innerHTML = appData.appInstructionsHeading;
-                document.querySelector("#instructions").innerHTML = appData.appInstructionsText;
-
-                document.querySelector("#greetButton").onclick = greetButtonClicked;
-                document.querySelector("#shoutButton").onclick = shoutButtonClicked;
-            }
-
-            function greetButtonClicked() {
-                let firstName = document.querySelector("#firstName").value;
-                let lastName = document.querySelector("#lastName").value;
-                output.innerHTML = greetify(`${firstName} ${lastName}`);
-            }
-
-            function shoutButtonClicked() {
-                let firstName = document.querySelector("#firstName").value;
-                let lastName = document.querySelector("#lastName").value;
-                output.innerHTML = shoutify(`${firstName} ${lastName}`);
-            }
-
-            function greetify(fullName) {
-                let greetings = ["Hello", "Hi", "Bonjour", "Guten tag", "Hola", "Shalom", "Salve"];
-                let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-                return `${randomGreeting} ${fullName}`;
-            }
-
-            function shoutify(fullName) {
-                let exclamations = ["!", "!!", "!?!", "?!!", "@#$%!", "???", "!!!"];
-                let randomExclamation = exclamations[Math.floor(Math.random() * exclamations.length)];
-                return `Hey ${fullName} ${randomExclamation}`.toUpperCase();
-            }
-
-        </script>
 </body>
 
 </html>

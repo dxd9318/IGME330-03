@@ -1,0 +1,17 @@
+body {
+    font-family: sans-serif;
+}
+
+button,
+input {
+    font-size: 1.2em;
+}
+
+li {
+    margin-bottom: 1em;
+}
+
+code {
+    font-size: 1.3em;
+    color: green;
+}
