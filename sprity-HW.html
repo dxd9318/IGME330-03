@@ -63,6 +63,20 @@
             }
 
         }
+
+        class ImageSprite extends Sprite {
+            constructor(x = 0, y = 0, span = 10, fwd = { x: 1, y: 0 }, speed = 0, image) {
+                super(x, y, span, fwd, speed);
+                this.image = image;
+            }
+
+            draw(ctx){
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.drawImage(this.image, -this.span / 2, -this.span / 2, this.span / 2, this.span / 2);
+                ctx.restore();
+            }
+        }
     </script>
 
     <script>
@@ -122,6 +136,8 @@
         let gradient;
         let sprites = [];
         const canvasWidth = 600, canvasHeight = 400;
+
+        let imageURL = "https://www.pngkey.com/png/full/54-540376_tropical-flower-transparent-background.png";
 
         window.onload = init;
 
