@@ -73,7 +73,7 @@
             draw(ctx){
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                ctx.drawImage(this.image, -this.span / 2, -this.span / 2, this.span / 2, this.span / 2);
+                ctx.drawImage(this.image, -this.span / 2, -this.span / 2, this.span, this.span);
                 ctx.restore();
             }
         }
@@ -86,7 +86,7 @@
         // Also check out `createLinearGradient()`, it's new and handy
 
         // preloadImage(imageURL,callbackFunc);
-        function preloadImage(url,callback){
+        function preloadImage(url,callback) {
             let img = new Image();
             img.src = url;
             img.onload = _=>{
@@ -164,8 +164,11 @@
             //loop();
             preloadImage(imageURL, function(image) {
                 spriteImage = image;
+                sprites = sprites.concat(sprites, createImageSprites(15, spriteImage, ImageSprite));
+
                 loop();
             });
+
         }
 
         function loop() {
@@ -222,6 +225,24 @@
             return array;
         }
 
+        function createImageSprites(num, image, classRef = ImageSprite) {
+            let imgSpriteArray = [];
+
+            for (let i = 0; i < num; i++) {
+                let x = Math.random() * (canvasWidth - 100) + 50;
+                let y = Math.random() * (canvasHeight - 100) + 50;
+                let span = 15 + Math.random() * 25;
+                let fwd = getRandomUnitVector();
+                let speed = Math.random() + 2;
+                let s = new classRef(x, y, span, fwd, speed, image);
+
+                // add to end of array
+                imgSpriteArray.push(s);
+            }
+
+            return imgSpriteArray;
+        }
+
         // #9 - standard "move and check world boundaries" code
         function moveAndDrawSprites(ctx) {
             ctx.save();
@@ -245,6 +266,8 @@
             } // end for
             ctx.restore();
         }
+
+
 
     </script>
 
