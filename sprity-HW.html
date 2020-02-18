@@ -65,8 +65,9 @@
         }
 
         class ImageSprite extends Sprite {
-            constructor(x = 0, y = 0, span = 10, fwd = { x: 1, y: 0 }, speed = 0, image) {
+            constructor(x = 0, y = 0, span = 10, fwd = { x: 1, y: 0 }, speed = 0, rotSpeed = Math.PI/6, image) {
                 super(x, y, span, fwd, speed);
+                this.rotSpeed = rotSpeed;
                 this.image = image;
             }
 
@@ -75,6 +76,10 @@
                 ctx.translate(this.x, this.y);
                 ctx.drawImage(this.image, -this.span / 2, -this.span / 2, this.span, this.span);
                 ctx.restore();
+            }
+
+            rotate() {
+                this.rotSpeed += this.rotSpeed;
             }
         }
     </script>
@@ -182,6 +187,7 @@
             ctx.restore();
 
             // move and draw sprites
+            rotateImageSprites(ctx);        
             moveAndDrawSprites(ctx);
         }
 
@@ -234,7 +240,8 @@
                 let span = 15 + Math.random() * 25;
                 let fwd = getRandomUnitVector();
                 let speed = Math.random() + 2;
-                let s = new classRef(x, y, span, fwd, speed, image);
+                let rotSpeed = Math.PI / (Math.random(1,6));
+                let s = new classRef(x, y, span, fwd, speed, rotSpeed, image);
 
                 // add to end of array
                 imgSpriteArray.push(s);
@@ -264,6 +271,16 @@
                 s.draw(ctx);
 
             } // end for
+            ctx.restore();
+        }
+
+        function rotateImageSprites(ctx){
+            ctx.save();
+            for (let i = 30; i < 45; i++){
+                ctx.rotate(sprites[i].rotSpeed);
+                sprites[i].draw(ctx);
+            }
+
             ctx.restore();
         }
 
