@@ -93,6 +93,28 @@ function setupUI(canvasElement) {
         }
     };
 
+
+    // Checkboxes handling
+    document.querySelector("#gradientCB").checked = drawParams.showGradient;
+    document.querySelector("#gradientCB").onchange = e => {
+        drawParams.showGradient = e.target.checked;
+    }
+
+    document.querySelector("#barsCB").checked = drawParams.showBars;
+    document.querySelector("#barsCB").onchange = e => {
+        drawParams.showBars = e.target.checked;
+    }
+
+    document.querySelector("#circlesCB").checked = drawParams.showCircles;
+    document.querySelector("#circlesCB").onchange = e => {
+        drawParams.showCircles = e.target.checked;
+    }
+
+    document.querySelector("#noiseCB").checked = drawParams.showNoise;
+    document.querySelector("#noiseCB").onchange = e => {
+        drawParams.showNoise = e.target.checked;
+    }
+
 } // end setupUI
 
 function loop() {
