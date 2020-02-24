@@ -16,6 +16,8 @@ const drawParams = {
     showBars: true,
     showCircles: true,
     showNoise: false,
+    showInvert: false,
+    showEmboss: false
 }
 
 // 1 - here we are faking an enumeration
@@ -113,6 +115,16 @@ function setupUI(canvasElement) {
     document.querySelector("#noiseCB").checked = drawParams.showNoise;
     document.querySelector("#noiseCB").onchange = e => {
         drawParams.showNoise = e.target.checked;
+    }
+
+    document.querySelector("#invertCB").checked = drawParams.showInvert;
+    document.querySelector("#invertCB").onchange = e => {
+        drawParams.showInvert = e.target.checked;
+    }
+
+    document.querySelector("#embossCB").checked = drawParams.showEmboss;
+    document.querySelector("#embossCB").onchange = e => {
+        drawParams.showEmboss = e.target.checked;
     }
 
 } // end setupUI
