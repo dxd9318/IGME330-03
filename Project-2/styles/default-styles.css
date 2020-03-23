@@ -1,6 +1,22 @@
 body {
 	background: #eeeeee;
-	font-family: tahoma, verdana, sans serif;
+  font-family: tahoma, verdana, sans serif;
+  
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+#permanent-marker{
+  font-family: 'Permanent Marker', cursive;
+}
+
+main{
+  float:left;
+}
+
+h1{
+  font-family: 'Permanent Marker';
 }
 
 canvas {
@@ -13,6 +29,8 @@ canvas {
 
 #controls{
   margin-left: 1rem;
+  overflow: auto;
+  padding: 60px 20px;
 }
 
 #volumeLabel{
@@ -39,4 +57,18 @@ button[data-playing="no"]:after{
 #fsButton{
   font-size: 1.2rem;
   width: 8rem;
+}
+
+.font-loader{
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
