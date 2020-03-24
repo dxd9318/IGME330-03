@@ -21,24 +21,37 @@
 
             <label>Track:
                 <select id="trackSelect">
-                    <option value="media/Laserpack.mp3" selected>Laserpack</option>
+                    <option value="media/Death and Axes.mp3" selected>Death and Axes</option>
+                    <option value="media/Flying Kerfuffle.mp3">Flying Kerfuffle</option>                    
+                    <option value="media/Laserpack.mp3">Laserpack</option>
+                    <option value="media/Funky One.mp3">Funky One</option>
                 </select>
             </label>
         </section>
 
         <section>
-            Volume: <input type="range" id="volumeSlider" min="0" max="2" value="1" step="0.01">
+            Volume: <input type="range" id="volumeSlider" min="0" max="2" value="0.5" step="0.01">
             <span id="volumeLabel">???</span>
         </section>
 
         <section>
             <span><input type="checkbox" id="gradientCB"><label for="gradientCB">Show Gradient</label></span>
-            <span><input type="checkbox" id="barsCB"><label for="barsCB">Show Bars</label></span>
-            <span><input type="checkbox" id="circlesCB"><label for="circlesCB">Show Circles</label></span>
-
+            <span><input type="checkbox" id="barsCB"><label for="barsCB">Show Waveform Data</label></span>
+            <span><input type="checkbox" id="circlesCB"><label for="circlesCB">Show Frequency Data</label></span>
+            <br><br>
             <span><input type="checkbox" id="noiseCB"><label for="noiseCB">Show Noise</label></span>
             <span><input type="checkbox" id="invertCB"><label for="invertCB">Invert Colors</label></span>
             <span><input type="checkbox" id="embossCB"><label for="embossCB">Emboss Image</label></span>
+            <br><br>
+            <span><input type="checkbox" id="tintCB"><label for="tintCB">Tint Canvas</label></span>
+            <br>
+            <!--RADIO BUTTONS, options: dark red AS DEFAULT, blue, bubbly pink, yellow-->
+            <span title="Color of canvas tint">
+                <input type="radio" name="tintColor" value="darkred" checked>Dark Red
+                <input type="radio" name="tintColor" value="blue">Blue
+                <input type="radio" name="tintColor" value="pink">Pink
+                <input type="radio" name="tintColor" value="yellow">Yellow
+            </span>
         </section>
     </div>
 

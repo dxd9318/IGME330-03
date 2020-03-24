@@ -19,7 +19,7 @@ function setupCanvas(canvasElement, analyserNodeRef) {
     canvasHeight = canvasElement.height;
     // create a gradient that runs top to bottom
     // color palette from https://digitalsynopsis.com/design/beautiful-color-gradient-palettes/
-    gradient = utils.getLinearGradient(ctx, 0, 0, 0, canvasHeight, [{ percent: 0, color: "#240E8B" }, { percent: .25, color: "#3c4cad" }, { percent: .5, color: "#f04393" }, { percent: .75, color: "#f9c449" }, { percent: 1, color: "#E8A49C" }]);
+    gradient = utils.getLinearGradient(ctx, 0, 0, canvasWidth, 0, [{ percent: 0, color: "#240E8B" }, { percent: .25, color: "#3c4cad" }, { percent: .5, color: "#f04393" }, { percent: .75, color: "#f9c449" }, { percent: 1, color: "#E8A49C" }]);
     // keep a reference to the analyser node
     analyserNode = analyserNodeRef;
     // this is the array where the analyser data will be stored
@@ -36,7 +36,7 @@ function draw(params = {}) {
 
     // 2 - draw background
     ctx.save();
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "#240E8B";
     ctx.globalAlpha = .1;
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     ctx.restore();
@@ -157,10 +157,6 @@ function draw(params = {}) {
     }
 
     // 6 - bitmap manipulation
-    // TODO: right now. we are looping though every pixel of the canvas (320,000 of them!), 
-    // regardless of whether or not we are applying a pixel effect
-    // At some point, refactor this code so that we are looping though the image data only if
-    // it is necessary
 
     // A) grab all of the pixels on the canvas and put them in the `data` array
     // `imageData.data` is a `Uint8ClampedArray()` typed array that has 1.28 million elements!
@@ -199,6 +195,27 @@ function draw(params = {}) {
             data[i + 1] = 255 - green;
             data[i + 2] = 255 - blue;
         }
+
+        if (params.showTint) {
+            if(params.tintColor == "darkred"){
+                // decrease all channels to make it blacker, then increase red channel
+                data[i] = data[i] + 50;
+                data[i+1] = data[i+1] - 70;
+                data[i+2] = data[i+2] - 70;
+            } else if(params.tintColor == "blue"){
+                //increase blue channel
+                data[i+2] = data[i+2] + 50;
+            } else if(params.tintColor == "pink"){
+                // increase all channels to make it whiter, then increase red channel
+                data[i] = data[i] + 100;
+                data[i+1] = data[i+1] + 50;
+                data[i+2] = data[i+2] + 50;
+            } else { //yellow
+                // increase red and green channels
+                data[i] = data[i] + 50;
+                data[i+1] = data[i+1] + 50;
+            }
+        }
     } // end for
 
     // embossing effect
@@ -209,10 +226,8 @@ function draw(params = {}) {
             data[i] = 127 + 2 * data[i] - data[i + 4] - data[i + width * 4];
         }
     }
-
     // D) copy image data back to canvas
     ctx.putImageData(imageData, 0, 0);
-
 }
 
 export { setupCanvas, draw };

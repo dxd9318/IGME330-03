@@ -12,17 +12,19 @@ import * as audio from './audio.js';
 import * as canvas from './canvas.js';
 
 const drawParams = {
-    showGradient: true,
+    showGradient: false,
     showBars: true,
     showCircles: true,
     showNoise: false,
     showInvert: false,
-    showEmboss: false
+    showEmboss: false,
+    showTint: false,
+    tintColor: "darkred"
 }
 
 // 1 - here we are faking an enumeration
 const DEFAULTS = Object.freeze({
-    sound1: "media/New Adventure Theme.mp3"
+    sound1: "media/Death and Axes.mp3"
 });
 
 audio.setupWebAudio(DEFAULTS.sound1);
@@ -62,10 +64,16 @@ function setupUI(canvasElement) {
             // if track is paused, play it
             audio.playCurrentSound();
             e.target.dataset.playing = "yes";
+
+            // draw gradient when playing
+            drawParams.showGradient = true;
         } else {
             // if track is playing, pause it
             audio.pauseCurrentSound();
             e.target.dataset.playing = "no";
+            
+            // stop gradient when not playing
+            drawParams.showGradient = false;
         }
     };
 
@@ -127,6 +135,17 @@ function setupUI(canvasElement) {
         drawParams.showEmboss = e.target.checked;
     }
 
+    document.querySelector("#tintCB").checked = drawParams.showTint;
+    document.querySelector("#tintCB").onchange = e => {
+        drawParams.showTint = e.target.checked;
+    }
+
+    let radioButtons = document.querySelectorAll("input[type=radio][name=tintColor]");
+    for (let r of radioButtons){
+        r.onchange = function (e){
+            drawParams.tintColor = e.target.value;
+        }
+    }
 } // end setupUI
 
 function loop() {
