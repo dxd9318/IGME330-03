@@ -216,6 +216,12 @@ function draw(params = {}) {
                 data[i+1] = data[i+1] + 50;
             }
         }
+
+        if(params.changeBrightness){
+            data[i] = data[i] + params.brightnessValue;
+            data[i+1] = data[i+1] + params.brightnessValue;
+            data[i+2] = data[i+2] + params.brightnessValue;
+        }
     } // end for
 
     // embossing effect

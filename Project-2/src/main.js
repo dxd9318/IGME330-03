@@ -19,7 +19,11 @@ const drawParams = {
     showInvert: false,
     showEmboss: false,
     showTint: false,
-    tintColor: "darkred"
+    tintColor: "darkred",
+    changeBrightness: false,
+    brightnessValue: 0,
+    enableDelay: false,
+    delayValue: 0
 }
 
 // 1 - here we are faking an enumeration
@@ -146,6 +150,27 @@ function setupUI(canvasElement) {
             drawParams.tintColor = e.target.value;
         }
     }
+
+    document.querySelector("#brightnessCB").checked = drawParams.changeBrightness;
+    document.querySelector("#brightnessCB").onchange = e => {
+        drawParams.changeBrightness = e.target.checked;
+    }
+
+    document.querySelector("#brightnessSlider").oninput = e =>{
+        drawParams.brightnessValue = e.target.value;
+        brightnessLabel.innerHTML = e.target.value;
+    }
+
+    document.querySelector("#delayCB").checked = drawParams.enableDelay;
+    document.querySelector("#delayCB").onchange = e =>{
+        drawParams.enableDelay = e.target.checked;
+    }
+
+    document.querySelector("#delaySlider").oninput = e =>{
+        drawParams.delayValue = e.target.value;
+        delayLabel.innerHTML = e.target.value;
+    }
+
 } // end setupUI
 
 function loop() {

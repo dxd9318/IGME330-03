@@ -18,6 +18,7 @@
         <section>
             <button id="playButton" data-playing="no"></button>
             <button id="fsButton">Full Screen</button>
+            <br>
 
             <label>Track:
                 <select id="trackSelect">
@@ -43,15 +44,32 @@
             <span><input type="checkbox" id="invertCB"><label for="invertCB">Invert Colors</label></span>
             <span><input type="checkbox" id="embossCB"><label for="embossCB">Emboss Image</label></span>
             <br><br>
+            
             <span><input type="checkbox" id="tintCB"><label for="tintCB">Tint Canvas</label></span>
             <br>
-            <!--RADIO BUTTONS, options: dark red AS DEFAULT, blue, bubbly pink, yellow-->
             <span title="Color of canvas tint">
                 <input type="radio" name="tintColor" value="darkred" checked>Dark Red
                 <input type="radio" name="tintColor" value="blue">Blue
                 <input type="radio" name="tintColor" value="pink">Pink
                 <input type="radio" name="tintColor" value="yellow">Yellow
             </span>
+            <br><br>
+
+            <span><input type=checkbox id="brightnessCB"><label for="brightnessCB">Canvas Brightness</label></span>
+            <br>
+            <section>
+                Brightness: <input type="range" id="brightnessSlider" min="-5" max="5" value="0" step="1">
+                <span id="brightnessLabel">0</span>
+            </section>
+
+            <!-- AUDIO EFFECT NODE: DelayNode-->
+            <span><input type=checkbox id="delayCB"><label for="delayCB">Add Sound Delay</label></span>
+            <br>
+            <section>
+                Delay: <input type="range" id="delaySlider" min="0" max="5" value="0" step="1">
+                <span id="delayLabel">0</span>
+            </section>
+
         </section>
     </div>
 
