@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Load Text - XHR</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Load Text - <code>XMLHttpRequest</code> - aka XHR</h1>
+    <section>
+        <select>
+            <option value="">&lt;Choose a file></option>
+            <option value="data/gettysburg-address.txt">Gettysburg Address</option>
+            <option value="data/call-of-cthulhu.txt">Call of Cthulhu</option>
+        </select>
+        <p id="output"></p>
+    </section>
+    <script>
+        let output = document.querySelector("#output");
+        document.querySelector("select").onchange = doChange;
+
+        function doChange(e) {
+            let xhr = new XMLHttpRequest();
+            let url = e.target.value;
+            if (!url) return;
+            xhr.onload = dataLoaded;
+            xhr.onerror = _ => "There was an error loading the file.";
+            xhr.overrideMimeType("text/plain");
+            xhr.open("GET", url);
+            xhr.send();
+        }
+
+        function dataLoaded(e) {
+            let s = e.target.responseText;
+            output.innerHTML = s;
+        }
+
+    </script>
+</body>
+
+</html>

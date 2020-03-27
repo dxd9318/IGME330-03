@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Palindrome HW</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .truePali {
+            color: green;
+        }
+
+        .falsePali {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Palindrome Checker</h1>
+    <section>
+        <p><input id="input" type="text" size="50" maxlength="50" autofocus
+                value="It was a dark and stormy night ..." /></p>
+        <p id="output"></p>
+    </section>
+    <script>
+        let input = document.querySelector("#input");
+        let output = document.querySelector("#output");
+
+        input.oninput = doInput; // called whenever the content of the field changes
+        input.onchange = doChange; // called when the field loses focus or when the return key is pressed
+        input.dispatchEvent(new Event("input")); // calls doInput() when the page first loads
+
+        function doInput(e) {
+            let text = e.target.value;
+            //output.innerHTML = text;
+
+            // 1 - indexOf()
+            //let index = text.indefOf("dark");
+            //output.innerHTML = index;
+
+            // 2 - substring()
+            //let sub = text.substring(2,10);
+            //output.innerHTML = sub;
+
+            // 3 - replace()
+            // let regex = /dark\b/gi;  //global, case insensitive
+            // text=text.replace(regex, "Sunny!");
+            // output.innerHTML = text;
+
+            // let regex = /\s+/gi;  //global, case insensitive
+            // text=text.replace(regex, "").toLowerCase();
+            // output.innerHTML = text;
+
+            text = text.replace(/\s+/g, '').toLowerCase();
+            text = text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?'"]+/g,'');
+            let reversed = text.split("").reverse().join("");  //split() creates an array // join() creates a string
+            
+            if(text == reversed){
+                output.classList.remove("falsePali");
+                output.classList.add("truePali");
+                output.innerHTML = "It's a palindrome!";
+            } else {
+                output.classList.remove("truePali");
+                output.classList.add("falsePali");
+                output.innerHTML = "It's a not palindrome";
+            }
+        }
+
+        function doChange(e) {
+            output.classList.remove("truePali");
+            output.classList.remove("falsePali");
+            output.innerHTML = "The input field no longer has focus, or you hit `return`!";
+        }
+
+    </script>
+</body>
+
+</html>
