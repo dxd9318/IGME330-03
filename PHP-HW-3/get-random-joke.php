@@ -8,7 +8,7 @@
 		["q"=>"Why don't sharks like to eat clowns?","a"=>"Because they taste funny!"],
         ["q"=>"What did the fish say when be bumped his head?","a"=>"Dam!"],
         ["q"=>"What happens when you tickle an Easter egg?", "a"=>"It cracks up!"],
-        ["q"=>"Why shouldn't you tease egg whites?", "a"=>"They can't take a yoke!"],
+        ["q"=>"Why shouldn't you tease egg whites?", "a"=>"They can't take a yolk!"],
         ["q"=>"Why did the ice cream van break down?", "a"=>"There was a rocky road!"],
         ["q"=>"What kind of ice cream do electricians eat?", "a"=>"Shockalot!"],
         ["q"=>"Why do we put candles on the top of birthday cakes?", "a"=>"Because it's too hard to put them on the bottom"],
