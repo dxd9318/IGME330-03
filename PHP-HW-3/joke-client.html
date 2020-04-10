@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>View a random joke</title>
+    <script>
+        window.onload = () => {
+
+            jokeBtn.onclick = (e) => {
+                // 1. Clear UI
+                setup.innerHTML = "Fetching a joke now!";
+                punchline.innerHTML = "";
+
+                // 2. Create an XHR object to download the web service
+                // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/
+                const xhr = new XMLHttpRequest();
+                const url = "get-random-joke.php";
+
+                // 3. set `onerror` handler
+                xhr.onerror = (e) => console.log("error");
+
+                // 4. set `onload` handler
+                xhr.onload = (e) => {
+                    const headers = e.target.getAllResponseHeaders();
+                    const jsonString = e.target.response;
+                    console.log(`headers = ${headers}`);
+                    console.log(`jsonString = ${jsonString}`);
+
+                    // update the UI by showing the joke
+                    const json = JSON.parse(jsonString);
+                    setup.innerHTML = `<b>${json.q}</b>`;
+                    punchline.innerHTML = `<i>${json.a}</i>`;
+                }; // end xhr.onload
+
+                // 5. open the connection using the HTTP GET method
+                xhr.open("GET", url);
+
+                // 6. we could send request headers here if we wanted to
+                // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader
+
+                // 7. finally, send the request
+                xhr.send();
+
+            }; // end onclick
+
+        }; // end window.onload
+
+    </script>
+</head>
+
+<body>
+    <h1>View a random joke</h1>
+    <button id="jokeBtn">Show me a Joke!</button>
+    <hr>
+    <p id="setup">???</p>
+    <p id="punchline">!!!</p>
+</body>
+
+</html>
