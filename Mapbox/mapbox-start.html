@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Map Start</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+    <div id='map' style='width: 400px; height: 300px;'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZHhkOTMxOCIsImEiOiJjazlkdDdreDcwN2QwM2VzNnBiZmg2b3lvIn0.qTwsHK-3ZAStaKfTf-gamg';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/dark-v10', //streets-v11',
+        });
+
+        map.setZoom(9);
+        map.setCenter([-77.6799, 43.083848]); // longitude, latitude - which is opposite of Google Maps
+        //map.setStyle('mapbox://styles/mapbox/satellite-v9');
+    </script>
+
+</body>
+
+</html>
