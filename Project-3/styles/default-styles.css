@@ -4,6 +4,10 @@ body {
     padding: 0;
 }
 
+h1 {
+    font-family: 'Stardos Stencil', sans-serif;
+}
+
 #map {
     top: 0;
     bottom: 0;
@@ -28,7 +32,8 @@ button {
     border: none;
     border-radius: 4px;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
+    font-family: 'Stardos Stencil', sans-serif;
     text-align: center;
     padding: 10px 0px;
 
@@ -58,7 +63,7 @@ button {
     color: #00ba54;
 }
 
-.marker {
+/* .marker {
     background-image: url('../images/mapbox-icon.png');
     background-size: cover;
     width: 50px;
@@ -73,5 +78,5 @@ button {
 
 .mapboxgl-popup-content {
     text-align: center;
-    font-family: 'Open Sans', sans-serif;
-}
+    font-family: 'Stardos Stencil', sans-serif;
+} */
