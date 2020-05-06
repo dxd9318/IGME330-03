@@ -1,11 +1,15 @@
+*{
+    background-color: rgb(94, 94, 121);
+    color: white;
+}
+
 body {
     margin: auto;
     width: 60%;
     padding: 0;
-}
 
-h1 {
     font-family: 'Stardos Stencil', sans-serif;
+
 }
 
 #map {
@@ -63,20 +67,16 @@ button {
     color: #00ba54;
 }
 
-/* .marker {
-    background-image: url('../images/mapbox-icon.png');
-    background-size: cover;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
+#astralResults > p {
+    margin-left: 1rem;
+    overflow: auto;
+    padding: 10px 20px;
 }
 
-.mapboxgl-popup {
-    max-width: 200px;
-}
-
-.mapboxgl-popup-content {
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     text-align: center;
-    font-family: 'Stardos Stencil', sans-serif;
-} */
+  }

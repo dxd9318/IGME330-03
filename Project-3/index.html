@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset='utf-8' />
-    <title>Project 3 - Find My Space View</title>
+    <title>Project 3 - Astral Data Mapper</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <!-- Mapbox API -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js'></script>
@@ -16,20 +16,34 @@
 </head>
 
 <body>
-    <h1>Find My Space View</h1>
-    <div id="map"></div>
-    <div id="controls">
-        <button class="location" id="SF">San Francisco</button>
-        <button class="location" id="NY">New York</button>
-        <button class="location" id="RJ">Rio de Janeiro</button>
-        <button class="location" id="LN">London</button>
-        <button class="location" id="AN">Antananarivo</button>
-        <button class="location" id="HK">Hong Kong</button>
-        <button class="location" id="SD">Sydney</button>
+    <h1>Astral Data Mapper</h1>
+    <main>
+        <div id="map"></div>
+    </main>
+    <section>
+        <div id="controls">
+            <button class="location" id="SF">San Francisco</button>
+            <button class="location" id="NY">New York</button>
+            <button class="location" id="RJ">Rio de Janeiro</button>
+            <button class="location" id="LN">London</button>
+            <button class="location" id="AN">Antananarivo</button>
+            <button class="location" id="HK">Hong Kong</button>
+            <button class="location" id="SD">Sydney</button>
 
-        <!-- add checkbox here -->
-        <button class="disabled location" id="userLocation" title="Requires browser location tracking to be enabled.">Find My Location</button>
-        <button id="resetMap">Reset Map</button>
-    </div>
-    <div id="astralResults"></div>
+            <!-- add checkbox here -->
+            <!-- <button class="disabled location" id="userLocation" title="Requires browser location tracking to be enabled.">Find My Location</button> -->
+            <button id="resetMap">Reset Map</button>
+        </div>
+        <div id="astralResults">
+            <p>
+                NOTICE: Please disable any ad-blockers to allow this app to work!<br><br>
+                Want to know when the sun and moon will rise and set at a location? Click one of the location buttons
+                above to find out.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>IGME 330-03 - Diana Diaz</p>
+    </footer>
 </body>
