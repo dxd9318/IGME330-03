@@ -5,24 +5,58 @@ body {
 }
 
 #map {
-    /* position: absolute; */
     top: 0;
     bottom: 0;
-    /* width: 100%; */
     
     width: 800px; 
     height: 600px;
+
+    float:left;
 }
 
-/* main{
-    float:left;
-  } */
-/* #controls{
+#controls {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+
     margin-left: 1rem;
     overflow: auto;
-    padding: 60px 20px;
-} */
+    padding: 10px 20px;
+}
 
+button {
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 0px;
+
+    transition-duration: 0.4s;
+}
+  
+#controls > .location {
+    background-color: #008CBA;
+}
+
+#controls > .location:hover:enabled {
+    background-color: white;
+    color:#008CBA;
+}
+
+#controls > .disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#controls > #resetMap {
+    background-color: #00ba54;
+}
+
+#controls > #resetMap:hover {
+    background-color: white;
+    color: #00ba54;
+}
 
 .marker {
     background-image: url('../images/mapbox-icon.png');

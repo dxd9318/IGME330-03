@@ -8,9 +8,6 @@
     <!-- Mapbox API -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css' rel='stylesheet' />
-    <!-- Mapbox Geocoder Plugin -->
-    <!-- <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css" /> -->
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!-- My JS and CSS -->
@@ -20,5 +17,19 @@
 
 <body>
     <h1>Project 3 - Find My Space View</h1>
-    <div id='map'></div>
+    <div id="map"></div>
+    <div id="controls">
+        <button class="location" id="SF">San Francisco</button>
+        <button class="location" id="NY">New York</button>
+        <button class="location" id="RJ">Rio de Janeiro</button>
+        <button class="location" id="LN">London</button>
+        <button class="location" id="AN">Antananarivo</button>
+        <button class="location" id="HK">Hong Kong</button>
+        <button class="location" id="SD">Sydney</button>
+
+        <!-- add checkbox here -->
+        <button class="disabled location" id="userLocation" title="Requires browser location tracking to be enabled.">Find My Location</button>
+        <button id="resetMap">Reset Map</button>
+    </div>
+    <div id="astralResults"></div>
 </body>
